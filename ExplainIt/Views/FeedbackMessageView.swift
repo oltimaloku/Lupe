@@ -1,28 +1,17 @@
-//
-//  FeedbackSegmentView.swift
-//  ExplainIt
-//
-//  Created by Olti Maloku on 2024-11-22.
-//
-
 import SwiftUI
 
 struct FeedbackMessageView: View {
     let feedbackAnalysis: FeedbackAnalysis
+    let selectedConcept: String?
     @EnvironmentObject var viewModel: ExplainViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Spacer() // Pushes the text to the right
-                Text("\(Int(feedbackAnalysis.overallGrade * 100))%")
-                    .font(.headline)
-                    .padding(.bottom, 4)
-                    .foregroundColor(getPercentageColour(percent: feedbackAnalysis.overallGrade))
-            }
-            
             ForEach(feedbackAnalysis.segments) { segment in
-                FeedbackSegmentView(segment: segment)
+                FeedbackSegmentView(
+                    segment: segment,
+                    isSelected: selectedConcept == segment.concept
+                )
             }
         }
         .padding()
@@ -30,7 +19,7 @@ struct FeedbackMessageView: View {
         .cornerRadius(12)
     }
     
-    private func getPercentageColour(percent: Double) -> Color{
+    private func getPercentageColour(percent: Double) -> Color {
         switch percent {
         case ..<0.5:
             return .red
@@ -48,6 +37,7 @@ struct FeedbackMessageView: View {
 
 struct FeedbackSegmentView: View {
     let segment: FeedbackSegment
+    let isSelected: Bool
     @EnvironmentObject var viewModel: ExplainViewModel
     @State private var showExplanation = false
     
@@ -56,6 +46,12 @@ struct FeedbackSegmentView: View {
             .padding(6)
             .background(segment.feedbackType.color)
             .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isSelected ? getBorderColor(for: segment.feedbackType) : Color.clear, lineWidth: 2)
+            )
+            .scaleEffect(isSelected ? 1.02 : 1.0)
+            .animation(.spring(response: 0.3), value: isSelected)
             .onTapGesture {
                 showExplanation.toggle()
             }
@@ -64,5 +60,15 @@ struct FeedbackSegmentView: View {
                     .environmentObject(viewModel)
             }
     }
+    
+    private func getBorderColor(for feedbackType: FeedbackType) -> Color {
+            switch feedbackType {
+            case .correct:
+                return Color.green.opacity(0.8)
+            case .partiallyCorrect:
+                return Color.yellow.opacity(0.8)
+            case .incorrect:
+                return Color.red.opacity(0.8)
+            }
+        }
 }
-

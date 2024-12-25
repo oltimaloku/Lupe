@@ -16,6 +16,8 @@ struct FeedbackSegment: Identifiable, Codable {
     let keyPointsAddressed: [String]
     let criteriaMatched: [String]
     let definition: String?
+    let isNewConcept: Bool
+    let relatedToConceptId: UUID?
     
     init(id: UUID = UUID(),
          text: String,
@@ -24,7 +26,10 @@ struct FeedbackSegment: Identifiable, Codable {
          concept: String,
          keyPointsAddressed: [String],
          criteriaMatched: [String],
-         definition: String? = nil) {
+         definition: String? = nil,
+         isNewConcept: Bool,
+         relatedToConceptId: UUID? = nil
+    ) {
         self.id = id
         self.text = text
         self.feedbackType = feedbackType
@@ -33,6 +38,8 @@ struct FeedbackSegment: Identifiable, Codable {
         self.keyPointsAddressed = keyPointsAddressed
         self.criteriaMatched = criteriaMatched
         self.definition = definition
+        self.isNewConcept = isNewConcept
+        self.relatedToConceptId = relatedToConceptId
     }
     
     // Custom decoder to handle the feedbackType coming from the API
@@ -46,15 +53,18 @@ struct FeedbackSegment: Identifiable, Codable {
         keyPointsAddressed = try container.decode([String].self, forKey: .keyPointsAddressed)
         criteriaMatched = try container.decode([String].self, forKey: .criteriaMatched)
         definition = try container.decodeIfPresent(String.self, forKey: .definition)
+        isNewConcept = try container.decode(Bool.self, forKey: .isNewConcept)
+        relatedToConceptId = try container.decodeIfPresent(UUID.self, forKey: .relatedToConceptId)
         
         let feedbackTypeString = try container.decode(String.self, forKey: .feedbackType)
         switch feedbackTypeString.lowercased() {
         case "correct":
             feedbackType = .correct
-        case "partially correct", "partially_correct":
+        case "partially correct", "partially_correct", "partial":
             feedbackType = .partiallyCorrect
         case "incorrect":
             feedbackType = .incorrect
+        
         default:
             throw DecodingError.dataCorruptedError(forKey: .feedbackType,
                 in: container,
@@ -63,7 +73,7 @@ struct FeedbackSegment: Identifiable, Codable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case text, feedbackType, explanation, concept, keyPointsAddressed, criteriaMatched, definition
+        case text, feedbackType, explanation, concept, keyPointsAddressed, criteriaMatched, definition, isNewConcept, relatedToConceptId
     }
 }
 
@@ -77,6 +87,26 @@ enum FeedbackType: String, Codable {
         case .correct: return .green.opacity(0.3)
         case .partiallyCorrect: return .yellow.opacity(0.3)
         case .incorrect: return .red.opacity(0.3)
+        }
+    }
+}
+
+enum GradingError: LocalizedError {
+    case invalidResponse
+    case invalidGradingCriteria(String)
+    case missingRequiredConcepts([String])
+    case gradingFailed(underlying: Error)
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidResponse:
+            return "Failed to get a valid response from the grading system"
+        case .invalidGradingCriteria(let criteria):
+            return "Invalid grading criteria: \(criteria)"
+        case .missingRequiredConcepts(let concepts):
+            return "Response missing required concepts: \(concepts.joined(separator: ", "))"
+        case .gradingFailed(let error):
+            return "Grading failed: \(error.localizedDescription)"
         }
     }
 }

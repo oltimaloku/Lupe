@@ -6,7 +6,7 @@ struct PromptView: View {
     @State private var showError: Bool = false
     @State private var errorMessage: String = ""
     
-    @StateObject private var viewModel = ExplainViewModel()
+    @StateObject private var viewModel = ExplainViewModel.create()
     
     var body: some View {
         NavigationStack {
@@ -38,7 +38,8 @@ struct PromptView: View {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.topics, id: \.id) { topic in
-                            NavigationLink(destination: TopicView(topic: topic)) {
+                           
+                            NavigationLink(destination: TopicView(topic: topic).environmentObject(viewModel)) {
                                 TopicCard(name: topic.name, icon: topic.icon)
                             }
                         }
@@ -68,7 +69,7 @@ struct PromptView: View {
         isNavigating = true
         Task {
             do {
-                try await viewModel.setupTopicAndGenerateQuestions(for: inputText)
+                try await viewModel.initializeTopic(for: inputText)
                 await MainActor.run {
                     isNavigating = true
                     inputText = "" // Clear the input after successful submission

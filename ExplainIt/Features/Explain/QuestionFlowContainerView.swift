@@ -2,13 +2,15 @@ import SwiftUI
 
 struct QuestionFlowContainerView: View {
     @EnvironmentObject private var viewModel: ExplainViewModel
+    @State private var showingReview = false
     
     private var isLastQuestion: Bool {
         viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1
     }
     
-    private var showingReview: Bool {
-        isLastQuestion && viewModel.showingFeedback &&
+    private var hasCompletedLastQuestion: Bool {
+        isLastQuestion &&
+        viewModel.showingFeedback &&
         viewModel.questionFeedback[viewModel.currentQuestion?.id ?? UUID()] != nil
     }
     
@@ -24,7 +26,9 @@ struct QuestionFlowContainerView: View {
             else if viewModel.showingFeedback {
                 FeedbackView(
                     onNextQuestion: {
-                        if !isLastQuestion {
+                        if hasCompletedLastQuestion {
+                            showingReview = true
+                        } else {
                             viewModel.setNextQuestion()
                             viewModel.showExplainView()
                         }

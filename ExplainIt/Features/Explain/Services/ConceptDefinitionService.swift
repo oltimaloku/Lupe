@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ConceptDefinitionService {
-    func getDefinition(for concept: String) async throws -> String
+    func getDefinition(for concept: String, in topic: String) async throws -> String
     func clearCache()
 }
 
@@ -13,7 +13,7 @@ class OpenAIConceptDefinitionService: ConceptDefinitionService {
         self.openAIService = openAIService
     }
     
-    func getDefinition(for concept: String) async throws -> String {
+    func getDefinition(for concept: String, in topic: String) async throws -> String {
         if let cachedDefinition = definitionCache[concept] {
             return cachedDefinition
         }
@@ -29,7 +29,7 @@ class OpenAIConceptDefinitionService: ConceptDefinitionService {
         let userGPTMessage = GPTMessage(
             role: "user",
             content: """
-            Please provide a detailed definition of the concept "\(concept)" and explain its relevance or application in learning or practical contexts.
+            Please provide a concise definition of the concept "\(concept)" in the context of "\(topic) and explain its relevance or application in learning or practical contexts.
             """
         )
         

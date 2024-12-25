@@ -167,17 +167,4 @@ struct FeedbackModal: View {
     }
 }
 
-// Preview
-#Preview {
-    let sampleFeedback = FeedbackSegment(
-        text: "Variables are containers that store information in memory",
-        feedbackType: .correct,
-        explanation: "Excellent explanation of variables",
-        concept: "Variables",
-        keyPointsAddressed: ["Memory storage", "Data containers"],
-        criteriaMatched: ["Basic understanding", "Technical accuracy"]
-    )
-    
-    return FeedbackModal(feedbackSegment: sampleFeedback)
-        .environmentObject(ExplainViewModel())
-}
+

@@ -48,8 +48,20 @@ class OpenAIGradingService: ResponseGradingService {
                 "explanation": "explanation referencing specific criteria from the rubric",
                 "concept": "concept from the required concepts list being addressed",
                 "keyPointsAddressed": ["specific key points addressed in this sentence"],
-                "criteriaMatched": ["specific grading criteria matched"]
+                "criteriaMatched": ["specific grading criteria matched"],
+                "isNewConcept": false,
+                "relatedToConceptId": null
             }
+            
+            For concepts that are not in the required concepts list but are relevant to the topic:
+            - Set isNewConcept to true
+            - Set relatedToConceptId to the most closely related required concept's ID
+            - Still provide feedback on correctness and explanation
+            
+            Required concepts and their IDs:
+            \(question.rubric.requiredConcepts.map { concept in
+                "- \(concept): \(UUID())"
+            }.joined(separator: "\n"))
             
             Ensure each feedback maps to specific criteria and concepts from the rubric.
             """
@@ -66,6 +78,7 @@ class OpenAIGradingService: ResponseGradingService {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        print("content: \(content)")
         return try decoder.decode([FeedbackSegment].self, from: data)
     }
     
