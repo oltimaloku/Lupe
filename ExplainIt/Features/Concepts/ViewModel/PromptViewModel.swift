@@ -12,6 +12,8 @@ import Combine
 class PromptViewModel: ObservableObject {
     @Published var topics: [Topic] = []
     @Published var isLoading: Bool = false
+    @Published var isStartingLearningFlow = false
+    @Published var newTopicId: UUID?
     
     private let topicRepository: TopicRepository
     private let diContainer: DIContainer
@@ -32,6 +34,7 @@ class PromptViewModel: ObservableObject {
     
     func initializeTopic(name: String) async throws -> UUID {
         isLoading = true
+        
         defer { isLoading = false }
         
         // Create new topic
@@ -41,6 +44,9 @@ class PromptViewModel: ObservableObject {
             icon: "book",
             concepts: []
         )
+        
+        newTopicId = topic.id
+        isStartingLearningFlow = true
         
         // Add to repository
         topicRepository.addTopic(topic)

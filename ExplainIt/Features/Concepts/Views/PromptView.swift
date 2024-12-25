@@ -73,6 +73,12 @@ struct PromptView: View {
             } message: {
                 Text(errorMessage)
             }
+            .navigationDestination(isPresented: $viewModel.isStartingLearningFlow) {
+                if let newTopicId = viewModel.newTopicId {
+                    QuestionFlowContainerView(topicId: newTopicId)
+                }
+                
+            }
         }
     }
     
