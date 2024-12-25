@@ -48,9 +48,6 @@ class PromptViewModel: ObservableObject {
         newTopicId = topic.id
         isStartingLearningFlow = true
         
-        // Add to repository
-        topicRepository.addTopic(topic)
-        
         // Initialize the topic's ExplainViewModel
         let viewModel = diContainer.explainViewModel(for: topic.id)
         try await viewModel.initializeTopic(for: name)
