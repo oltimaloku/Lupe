@@ -1,12 +1,15 @@
 import SwiftUI
 
 struct TopicView: View {
+    @Environment(\.diContainer) private var diContainer
     @StateObject private var viewModel: TopicViewModel
+    @ViewModelProvider private var explainViewModel: ExplainViewModel
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) private var presentationMode
     
     init(topic: Topic) {
-        _viewModel = StateObject(wrappedValue: TopicViewModel(topic: topic))
+        _viewModel = StateObject(wrappedValue: DIContainer.shared.createTopicViewModel(topic: topic))
+        _explainViewModel = ViewModelProvider(topicId: topic.id)
     }
     
     var body: some View {
@@ -35,7 +38,7 @@ struct TopicView: View {
                 .padding(20)
             }
             
-            Button(action: { Task { await viewModel.startQuestionFlow() } }) {
+            Button(action: { Task { await startLearningFlow() } }) {
                 if viewModel.isLoading {
                     ProgressView()
                         .tint(.white)
@@ -80,10 +83,17 @@ struct TopicView: View {
             Text(viewModel.errorMessage)
         }
         .navigationDestination(isPresented: $viewModel.isStartingQuestionFlow) {
-            QuestionFlowContainerView().environmentObject(ExplainViewModel.create()) // TODO: should we pass something in here?
+            QuestionFlowContainerView(topicId: viewModel.topic.id)
         }
     }
+    
+    private func startLearningFlow() async {
+        await viewModel.startQuestionFlow()
+        try? await explainViewModel.generateQuestions(for: viewModel.topic.name)
+    }
 }
+
+
 // MARK: - Supporting Views
 struct ConceptHierarchyView: View {
     let concept: Concept

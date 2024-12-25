@@ -39,21 +39,7 @@ class ConceptViewModel: ObservableObject {
     
     // MARK: - Public Methods
     func startLearningFlow() async {
-        isLoading = true
-        defer { isLoading = false }
-        
-        do {
-            try await questionGenerator.generateQuestions(for: concept)
-            await MainActor.run {
-                isStartingLearningFlow = true
-            }
-        } catch {
-            await MainActor.run {
-                errorMessage = error.localizedDescription
-                showError = true
-                isStartingLearningFlow = false
-            }
-        }
+       isStartingLearningFlow = true
     }
     
     func addSubconcept(_ newConcept: Concept) async throws {

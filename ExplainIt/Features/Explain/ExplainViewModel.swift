@@ -81,10 +81,10 @@ class ExplainViewModel: ObservableObject {
     func generateQuestions(for topicName: String) async throws {
            isLoading = true
            defer { isLoading = false }
-           
+           print("topicName: \(topicName)")
            // Generate and store questions
            currentQuestions = try await questionGenerator.generateQuestionsForTopic(for: topicName)
-           
+           print("currentQuestions for \(topicName): \(currentQuestions)")
            // Reset responses and feedback
            userResponses.removeAll()
            questionFeedback.removeAll()

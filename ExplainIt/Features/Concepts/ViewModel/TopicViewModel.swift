@@ -36,21 +36,7 @@ class TopicViewModel: ObservableObject {
     }
     
     func startQuestionFlow() async {
-        isLoading = true
-        defer { isLoading = false }
-        
-        do {
-            try await questionGenerator.generateQuestionsForTopic(for: topic.name)
-            await MainActor.run {
-                isStartingQuestionFlow = true
-            }
-        } catch {
-            await MainActor.run {
-                errorMessage = error.localizedDescription
-                showError = true
-                isStartingQuestionFlow = false
-            }
-        }
+       isStartingQuestionFlow = true
     }
     
     func toggleConceptExpansion(_ conceptId: UUID) {

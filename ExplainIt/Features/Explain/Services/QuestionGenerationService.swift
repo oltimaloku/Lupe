@@ -70,6 +70,8 @@ class OpenAIQuestionGenerationService: QuestionGenerationService {
             throw GradingError.invalidResponse
         }
         
+        print("content: \(content)")
+        
         let decoder = JSONDecoder()
         let questionResponse = try decoder.decode(QuestionResponse.self, from: data)
         return questionResponse.questions.map { question in
@@ -137,6 +139,8 @@ class OpenAIQuestionGenerationService: QuestionGenerationService {
               let data = content.data(using: .utf8) else {
             throw GradingError.invalidResponse
         }
+        
+        
         
         let decoder = JSONDecoder()
         let questionResponse = try decoder.decode(QuestionResponse.self, from: data)

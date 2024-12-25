@@ -1,29 +1,21 @@
 import SwiftUI
 
 struct QuestionFlowContainerView: View {
-    @EnvironmentObject private var viewModel: ExplainViewModel
+    @ViewModelProvider private var viewModel: ExplainViewModel
     @State private var showingReview = false
     
-    private var isLastQuestion: Bool {
-        viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1
-    }
-    
-    private var hasCompletedLastQuestion: Bool {
-        isLastQuestion &&
-        viewModel.showingFeedback &&
-        viewModel.questionFeedback[viewModel.currentQuestion?.id ?? UUID()] != nil
+    init(topicId: UUID) {
+        _viewModel = ViewModelProvider(topicId: topicId)
     }
     
     var body: some View {
-        NavigationStack {
+        Group {
             if viewModel.isLoading {
                 LoadingIndicatorView()
-            }
-            else if showingReview {
+            } else if showingReview {
                 ReviewView()
                     .environmentObject(viewModel)
-            }
-            else if viewModel.showingFeedback {
+            } else if viewModel.showingFeedback {
                 FeedbackView(
                     onNextQuestion: {
                         if hasCompletedLastQuestion {
@@ -43,12 +35,20 @@ struct QuestionFlowContainerView: View {
                         }
                         viewModel.showExplainView()
                     }
-                ).environmentObject(viewModel)
+                )
+                .environmentObject(viewModel)
             } else {
                 ExplainView {
                     viewModel.showFeedbackView()
-                }.environmentObject(viewModel)
+                }
+                .environmentObject(viewModel)
             }
         }
+    }
+    
+    private var hasCompletedLastQuestion: Bool {
+        viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1 &&
+        viewModel.showingFeedback &&
+        viewModel.questionFeedback[viewModel.currentQuestion?.id ?? UUID()] != nil
     }
 }

@@ -1,12 +1,18 @@
 import SwiftUI
 
 struct PromptView: View {
+    @StateObject private var viewModel: PromptViewModel
     @State private var inputText: String = ""
     @State private var isNavigating: Bool = false
     @State private var showError: Bool = false
     @State private var errorMessage: String = ""
+    @State private var currentTopicId: UUID?
     
-    @StateObject private var viewModel = ExplainViewModel.create()
+    @Environment(\.diContainer) private var diContainer
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: PromptViewModel(diContainer: DIContainer.shared))
+    }
     
     var body: some View {
         NavigationStack {
@@ -21,13 +27,18 @@ struct PromptView: View {
                         .alignmentGuide(.bottom) { $0[.bottom] }
                     
                     Button(action: handleTopicSubmission) {
-                        IconBox(
-                            iconName: "arrow.up",
-                            backgroundColor: Color(UIColor.label),
-                            foregroundColor: Color(.systemBackground)
-                        )
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .tint(Color(.systemBackground))
+                        } else {
+                            IconBox(
+                                iconName: "arrow.up",
+                                backgroundColor: Color(UIColor.label),
+                                foregroundColor: Color(.systemBackground)
+                            )
+                        }
                     }
-                    .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty || viewModel.isLoading)
                 }
                 
                 Text("My Concepts")
@@ -38,21 +49,21 @@ struct PromptView: View {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.topics, id: \.id) { topic in
-                           
-                            NavigationLink(destination: TopicView(topic: topic).environmentObject(viewModel)) {
+                            NavigationLink(destination: TopicView(topic: topic)) {
                                 TopicCard(name: topic.name, icon: topic.icon)
                             }
                         }
                     }
                 }
                 
-                // New navigation using NavigationStack
-                NavigationLink(
-                    destination: QuestionFlowContainerView()
-                        .environmentObject(viewModel),
-                    isActive: $isNavigating
-                ) {
-                    EmptyView()
+                // Navigation to question flow
+                if let topicId = currentTopicId {
+                    NavigationLink(
+                        destination: QuestionFlowContainerView(topicId: topicId),
+                        isActive: $isNavigating
+                    ) {
+                        EmptyView()
+                    }
                 }
             }
             .padding(20)
@@ -66,13 +77,13 @@ struct PromptView: View {
     }
     
     private func handleTopicSubmission() {
-        isNavigating = true
         Task {
             do {
-                try await viewModel.initializeTopic(for: inputText)
+                let topicId = try await viewModel.initializeTopic(name: inputText)
                 await MainActor.run {
+                    currentTopicId = topicId
                     isNavigating = true
-                    inputText = "" // Clear the input after successful submission
+                    inputText = ""
                 }
             } catch {
                 await MainActor.run {
@@ -82,8 +93,4 @@ struct PromptView: View {
             }
         }
     }
-}
-
-#Preview {
-    PromptView()
 }

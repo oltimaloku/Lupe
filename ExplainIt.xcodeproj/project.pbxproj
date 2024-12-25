@@ -62,6 +62,9 @@
 		DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */; };
 		DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */; };
 		DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */; };
+		DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */; };
+		DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */; };
+		DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +122,9 @@
 		DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptViewModel.swift; sourceTree = "<group>"; };
 		DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbViewModel.swift; sourceTree = "<group>"; };
 		DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbView.swift; sourceTree = "<group>"; };
+		DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
+		DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +220,8 @@
 				DDAE25D32CF5420B002C127F /* Recorder.swift */,
 				DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */,
 				DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */,
+				DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */,
+				DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 				DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */,
 				DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */,
 				DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */,
+				DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -443,11 +452,14 @@
 				DD87B0BF2CE7E95F00FEACC7 /* PromptView.swift in Sources */,
 				DD87B0AF2CE1AFDA00FEACC7 /* ChatViewModel.swift in Sources */,
 				DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */,
+				DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */,
 				DD87B0C42CE7EFE600FEACC7 /* TopicCard.swift in Sources */,
 				DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */,
 				DDAE25D42CF5420B002C127F /* Recorder.swift in Sources */,
+				DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */,
 				DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */,
 				DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */,
+				DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */,
 				DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */,
 				DD87B0B22CE1B06000FEACC7 /* ChatView.swift in Sources */,
 				DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */,

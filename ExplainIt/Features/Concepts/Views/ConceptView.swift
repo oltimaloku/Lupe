@@ -2,10 +2,13 @@ import SwiftUI
 import MarkdownUI
 
 struct ConceptView: View {
+    @Environment(\.diContainer) private var diContainer
     @StateObject private var viewModel: ConceptViewModel
+    @ViewModelProvider private var explainViewModel: ExplainViewModel
     
     init(concept: Concept, topicId: UUID) {
-        _viewModel = StateObject(wrappedValue: ConceptViewModel(concept: concept, topicId: topicId))
+        _viewModel = StateObject(wrappedValue: DIContainer.shared.createConceptViewModel(concept: concept, topicId: topicId))
+        _explainViewModel = ViewModelProvider(topicId: topicId)
     }
     
     var body: some View {
@@ -63,7 +66,11 @@ struct ConceptView: View {
                 // Action Buttons
                 VStack(spacing: 12) {
                     // Learning Flow Button
-                    Button(action: { Task { await viewModel.startLearningFlow() } }) {
+                    Button(action: {
+                        Task {
+                            await startLearningFlow()
+                        }
+                    }) {
                         if viewModel.isLoading {
                             ProgressView()
                                 .tint(.white)
@@ -99,7 +106,7 @@ struct ConceptView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $viewModel.isStartingLearningFlow) {
-            QuestionFlowContainerView().environmentObject(ExplainViewModel.create()) // TODO: Look into this - should we passing something in?
+            QuestionFlowContainerView(topicId: viewModel.topicId)
         }
         .alert("Error", isPresented: $viewModel.showError) {
             Button("OK", role: .cancel) { }
@@ -109,6 +116,11 @@ struct ConceptView: View {
         .sheet(isPresented: $viewModel.showAddSubconceptSheet) {
             AddSubconceptSheet(viewModel: viewModel)
         }
+    }
+    
+    private func startLearningFlow() async {
+       await viewModel.startLearningFlow()
+        try? await explainViewModel.generateQuestions(for: viewModel.concept.name)
     }
 }
 
