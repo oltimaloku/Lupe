@@ -26,7 +26,6 @@
 		DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */; };
 		DD87B0D02CE81F7A00FEACC7 /* SpeechRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0CF2CE81F7A00FEACC7 /* SpeechRecognitionService.swift */; };
 		DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */; };
-		DD87B0D72CEFB35900FEACC7 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D62CEFB35900FEACC7 /* LearnView.swift */; };
 		DD87B0DA2CEFB37200FEACC7 /* ExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */; };
 		DD87B0DC2CEFB68B00FEACC7 /* ExplainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0DB2CEFB68B00FEACC7 /* ExplainViewModel.swift */; };
 		DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */; };
@@ -91,7 +90,6 @@
 		DD87B0CF2CE81F7A00FEACC7 /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
 		DD87B0D12CE8209400FEACC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnOrExplain.swift; sourceTree = "<group>"; };
-		DD87B0D62CEFB35900FEACC7 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainView.swift; sourceTree = "<group>"; };
 		DD87B0DB2CEFB68B00FEACC7 /* ExplainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExplainViewModel.swift; path = ../ExplainViewModel.swift; sourceTree = "<group>"; };
 		DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModal.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				DD87B0A12CDD65B400FEACC7 /* Preview Content */,
 				DD87B0AE2CE1AFDA00FEACC7 /* ChatViewModel.swift */,
 				DD87B0B82CE1B17400FEACC7 /* Secrets.swift */,
-				DD87B0C32CE7EFE600FEACC7 /* TopicCard.swift */,
 			);
 			path = ExplainIt;
 			sourceTree = "<group>";
@@ -209,8 +206,6 @@
 				DD87B0B32CE1B0C600FEACC7 /* MessageBubbleView.swift */,
 				DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */,
 				DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */,
-				DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */,
-				DD87B0DF2CF19B2B00FEACC7 /* FeedbackMessageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,6 +228,7 @@
 		DD87B0C02CE7EBDB00FEACC7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 				DD87B0C12CE7EBEC00FEACC7 /* EITextField.swift */,
 				DD87B0C52CE7F28900FEACC7 /* IconBox.swift */,
 				DDAE25E12CF8EDAD002C127F /* LoadingIndicatorView.swift */,
@@ -245,29 +241,21 @@
 			children = (
 				DD87B0E42CF2844D00FEACC7 /* Concepts */,
 				DD87B0D82CEFB35E00FEACC7 /* Explain */,
-				DD87B0D52CEFB34900FEACC7 /* Learn */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		DD87B0D52CEFB34900FEACC7 /* Learn */ = {
-			isa = PBXGroup;
-			children = (
-				DD87B0D62CEFB35900FEACC7 /* LearnView.swift */,
-			);
-			path = Learn;
 			sourceTree = "<group>";
 		};
 		DD87B0D82CEFB35E00FEACC7 /* Explain */ = {
 			isa = PBXGroup;
 			children = (
+				DDF903EE2D1CCB7200B9B947 /* Question */,
+				DDF903ED2D1CCB0600B9B947 /*  Feedback Components */,
 				DDF7EFA22D19E75C00347342 /* Components */,
 				DDF7EF9F2D17AC3800347342 /* Extensions */,
 				DDF7EF9C2D17A9C000347342 /* Respository */,
 				DDF7EF952D17A95700347342 /* Services */,
 				DDF7EF932D17A59E00347342 /* ViewModel */,
 				DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */,
-				DDAE25D72CF7FA7B002C127F /* FeedbackView.swift */,
 				DDAE25D92CF8DC60002C127F /* QuestionFlowContainerView.swift */,
 				DDAE25DD2CF8DCEA002C127F /* ConceptListView.swift */,
 				DDAE25DF2CF8DD31002C127F /* ConceptQuestionsView.swift */,
@@ -327,7 +315,6 @@
 		DDF7EFA22D19E75C00347342 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -356,10 +343,28 @@
 		DDF903E82D1CC88800B9B947 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DD87B0C32CE7EFE600FEACC7 /* TopicCard.swift */,
 				DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */,
 				DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		DDF903ED2D1CCB0600B9B947 /*  Feedback Components */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B0DF2CF19B2B00FEACC7 /* FeedbackMessageView.swift */,
+				DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */,
+				DDAE25D72CF7FA7B002C127F /* FeedbackView.swift */,
+			);
+			path = " Feedback Components";
+			sourceTree = "<group>";
+		};
+		DDF903EE2D1CCB7200B9B947 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Question;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,7 +455,6 @@
 				DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DD87B0CA2CE803EB00FEACC7 /* Concept.swift in Sources */,
 				DD87B0C62CE7F28900FEACC7 /* IconBox.swift in Sources */,
-				DD87B0D72CEFB35900FEACC7 /* LearnView.swift in Sources */,
 				DD87B0BB2CE1B1AB00FEACC7 /* Chat.swift in Sources */,
 				DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */,
 				DDF7EF9E2D17AA1C00347342 /* TopicRepository.swift in Sources */,

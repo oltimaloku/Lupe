@@ -14,9 +14,6 @@ struct FeedbackMessageView: View {
                 )
             }
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
     }
     
     private func getPercentageColour(percent: Double) -> Color {

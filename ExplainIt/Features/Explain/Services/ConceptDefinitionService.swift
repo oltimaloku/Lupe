@@ -21,8 +21,8 @@ class OpenAIConceptDefinitionService: ConceptDefinitionService {
         let systemMessage = GPTMessage(
             role: "system",
             content: """
-            You are an AI assistant providing detailed, concise definitions for educational purposes. \
-            Your task is to define the concept and explain its importance.
+            You are an AI assistant providing concise definitions for educational purposes. \
+            Your task is to define the concept and explain its importance given the context.
             """
         )
         
