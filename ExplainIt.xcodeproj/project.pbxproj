@@ -65,6 +65,8 @@
 		DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */; };
 		DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */; };
 		DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */; };
+		DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */; };
+		DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +127,8 @@
 		DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
 		DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptViewModel.swift; sourceTree = "<group>"; };
+		DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyView.swift; sourceTree = "<group>"; };
+		DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubconceptsSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +279,7 @@
 		DD87B0E42CF2844D00FEACC7 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
+				DDF903E82D1CC88800B9B947 /* Components */,
 				DDF903E12D1CA67400B9B947 /* Views */,
 				DDF903D82D1C9A7800B9B947 /* ViewModel */,
 				DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */,
@@ -346,6 +351,15 @@
 				DD87B0BE2CE7E95F00FEACC7 /* PromptView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DDF903E82D1CC88800B9B947 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */,
+				DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,6 +461,7 @@
 				DD87B0DC2CEFB68B00FEACC7 /* ExplainViewModel.swift in Sources */,
 				DD87B0B72CE1B15D00FEACC7 /* OpenAIService.swift in Sources */,
 				DD87B0E02CF19B2B00FEACC7 /* FeedbackMessageView.swift in Sources */,
+				DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */,
 				DDF7EF922D162AA400347342 /* ReviewView.swift in Sources */,
 				DDF7EF992D17A99700347342 /* ResponseGradingService.swift in Sources */,
 				DD87B0BF2CE7E95F00FEACC7 /* PromptView.swift in Sources */,
@@ -466,6 +481,7 @@
 				DDF7EFA12D17AC6F00347342 /* ExplainViewModel+Factory.swift in Sources */,
 				DD87B0C82CE8032B00FEACC7 /* Topic.swift in Sources */,
 				DDAE25DE2CF8DCEA002C127F /* ConceptListView.swift in Sources */,
+				DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */,
 				DDAE25DC2CF8DCBF002C127F /* ProgressIndicatorView.swift in Sources */,
 				DD87B0E82CF2CEEE00FEACC7 /* ConceptView.swift in Sources */,
 				DDAE25D82CF7FA7B002C127F /* FeedbackView.swift in Sources */,
