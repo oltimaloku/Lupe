@@ -31,6 +31,7 @@ extension Topic: CustomDebugStringConvertible {
 enum TopicError: LocalizedError {
     case topicNotFound
     case conceptAlreadyExists(String)
+    case conceptNotFound
     
     var errorDescription: String? {
         switch self {
@@ -38,6 +39,8 @@ enum TopicError: LocalizedError {
             return "The specified topic could not be found"
         case .conceptAlreadyExists(let conceptName):
             return "A concept with name '\(conceptName)' already exists in this topic"
+        case .conceptNotFound:
+            return "The specified concept could not be found"
         }
     }
 }

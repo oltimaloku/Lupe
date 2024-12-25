@@ -55,7 +55,7 @@ class OpenAIGradingService: ResponseGradingService {
             
             For concepts that are not in the required concepts list but are relevant to the topic:
             - Set isNewConcept to true
-            - Set relatedToConceptId to the most closely related required concept's ID
+            - Set relatedToConceptId to null
             - Still provide feedback on correctness and explanation
             
             Required concepts and their IDs:

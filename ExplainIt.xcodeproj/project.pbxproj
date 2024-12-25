@@ -54,7 +54,14 @@
 		DDF7EFA12D17AC6F00347342 /* ExplainViewModel+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7EFA02D17AC6F00347342 /* ExplainViewModel+Factory.swift */; };
 		DDF903CB2D1A1C5000B9B947 /* ConceptProficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CA2D1A1C5000B9B947 /* ConceptProficiency.swift */; };
 		DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */; };
-		DDF903CF2D1A8E2400B9B947 /* ConceptHierarchyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */; };
+		DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */; };
+		DDF903D32D1BBFF600B9B947 /* PracticeHistorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */; };
+		DDF903D52D1BC01A00B9B947 /* ProficiencyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */; };
+		DDF903D72D1BC05500B9B947 /* ProficiencyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */; };
+		DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */; };
+		DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */; };
+		DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */; };
+		DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +111,14 @@
 		DDF7EFA02D17AC6F00347342 /* ExplainViewModel+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExplainViewModel+Factory.swift"; sourceTree = "<group>"; };
 		DDF903CA2D1A1C5000B9B947 /* ConceptProficiency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProficiency.swift; sourceTree = "<group>"; };
 		DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProficiencyManager.swift; sourceTree = "<group>"; };
-		DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyService.swift; sourceTree = "<group>"; };
+		DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyService.swift; sourceTree = "<group>"; };
+		DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeHistorySection.swift; sourceTree = "<group>"; };
+		DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProficiencyCard.swift; sourceTree = "<group>"; };
+		DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProficiencyBadge.swift; sourceTree = "<group>"; };
+		DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptViewModel.swift; sourceTree = "<group>"; };
+		DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbViewModel.swift; sourceTree = "<group>"; };
+		DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +195,6 @@
 		DD87B0B02CE1B03A00FEACC7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DD87B0BE2CE7E95F00FEACC7 /* PromptView.swift */,
 				DD87B0B12CE1B06000FEACC7 /* ChatView.swift */,
 				DD87B0B32CE1B0C600FEACC7 /* MessageBubbleView.swift */,
 				DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */,
@@ -200,6 +213,7 @@
 				DD87B0E92CF3C15800FEACC7 /* WhisperTranscriptionService.swift */,
 				DDAE25D32CF5420B002C127F /* Recorder.swift */,
 				DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */,
+				DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -253,8 +267,12 @@
 		DD87B0E42CF2844D00FEACC7 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
-				DD87B0E52CF284DC00FEACC7 /* TopicView.swift */,
-				DD87B0E72CF2CEEE00FEACC7 /* ConceptView.swift */,
+				DDF903E12D1CA67400B9B947 /* Views */,
+				DDF903D82D1C9A7800B9B947 /* ViewModel */,
+				DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */,
+				DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */,
+				DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */,
+				DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */,
 			);
 			path = Concepts;
 			sourceTree = "<group>";
@@ -273,7 +291,6 @@
 				DDF7EF962D17A97A00347342 /* QuestionGenerationService.swift */,
 				DDF7EF982D17A99700347342 /* ResponseGradingService.swift */,
 				DDF7EF9A2D17A9AA00347342 /* ConceptDefinitionService.swift */,
-				DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -300,6 +317,26 @@
 				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		DDF903D82D1C9A7800B9B947 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */,
+				DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */,
+				DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDF903E12D1CA67400B9B947 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B0E72CF2CEEE00FEACC7 /* ConceptView.swift */,
+				DD87B0E52CF284DC00FEACC7 /* TopicView.swift */,
+				DD87B0BE2CE7E95F00FEACC7 /* PromptView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,14 +421,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDF903CF2D1A8E2400B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DDAE25E22CF8EDAD002C127F /* LoadingIndicatorView.swift in Sources */,
 				DD87B0B92CE1B17400FEACC7 /* Secrets.swift in Sources */,
 				DD87B0C22CE7EBEC00FEACC7 /* EITextField.swift in Sources */,
+				DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DD87B0CA2CE803EB00FEACC7 /* Concept.swift in Sources */,
 				DD87B0C62CE7F28900FEACC7 /* IconBox.swift in Sources */,
 				DD87B0D72CEFB35900FEACC7 /* LearnView.swift in Sources */,
 				DD87B0BB2CE1B1AB00FEACC7 /* Chat.swift in Sources */,
+				DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */,
 				DDF7EF9E2D17AA1C00347342 /* TopicRepository.swift in Sources */,
 				DD87B09C2CDD65B300FEACC7 /* ExplainItApp.swift in Sources */,
 				DDAE25E02CF8DD31002C127F /* ConceptQuestionsView.swift in Sources */,
@@ -408,23 +446,29 @@
 				DD87B0C42CE7EFE600FEACC7 /* TopicCard.swift in Sources */,
 				DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */,
 				DDAE25D42CF5420B002C127F /* Recorder.swift in Sources */,
+				DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */,
 				DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */,
 				DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */,
 				DD87B0B22CE1B06000FEACC7 /* ChatView.swift in Sources */,
+				DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */,
 				DDF7EFA12D17AC6F00347342 /* ExplainViewModel+Factory.swift in Sources */,
 				DD87B0C82CE8032B00FEACC7 /* Topic.swift in Sources */,
 				DDAE25DE2CF8DCEA002C127F /* ConceptListView.swift in Sources */,
 				DDAE25DC2CF8DCBF002C127F /* ProgressIndicatorView.swift in Sources */,
 				DD87B0E82CF2CEEE00FEACC7 /* ConceptView.swift in Sources */,
 				DDAE25D82CF7FA7B002C127F /* FeedbackView.swift in Sources */,
+				DDF903D72D1BC05500B9B947 /* ProficiencyBadge.swift in Sources */,
+				DDF903D52D1BC01A00B9B947 /* ProficiencyCard.swift in Sources */,
 				DDAE25D62CF5549D002C127F /* Question.swift in Sources */,
 				DD87B0B42CE1B0C600FEACC7 /* MessageBubbleView.swift in Sources */,
+				DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */,
 				DD87B0DA2CEFB37200FEACC7 /* ExplainView.swift in Sources */,
 				DDF903CB2D1A1C5000B9B947 /* ConceptProficiency.swift in Sources */,
 				DD87B0D02CE81F7A00FEACC7 /* SpeechRecognitionService.swift in Sources */,
 				DDF7EF9B2D17A9AA00347342 /* ConceptDefinitionService.swift in Sources */,
 				DD87B0EA2CF3C15800FEACC7 /* WhisperTranscriptionService.swift in Sources */,
 				DD87B0AA2CDD664F00FEACC7 /* Feedback.swift in Sources */,
+				DDF903D32D1BBFF600B9B947 /* PracticeHistorySection.swift in Sources */,
 				DDF7EF972D17A97A00347342 /* QuestionGenerationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

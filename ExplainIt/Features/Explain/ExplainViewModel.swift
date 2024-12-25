@@ -180,7 +180,7 @@ class ExplainViewModel: ObservableObject {
                 proficiencyManager.updateFromFeedback(
                     concept: &updatedConcept,
                     feedbackAnalysis: feedback,
-                    conceptHierarchy: conceptHierarchyService
+                    conceptHierarchy: conceptHierarchyService, topicId: currentTopic.id
                 )
                 
                 // Update the concept in the hierarchy
@@ -242,6 +242,22 @@ class ExplainViewModel: ObservableObject {
             definitions[conceptName] = def
         }
     }
+    
+    func addSubconcept(_ newConcept: Concept, to parentConcept: Concept) async throws {
+            guard var currentTopic = currentTopic else {
+                throw TopicError.topicNotFound
+            }
+            
+            var concepts = currentTopic.concepts
+            try conceptHierarchyService.addConceptToHierarchy(
+                newConcept,
+                parentId: parentConcept.id,
+                in: &concepts
+            )
+            
+            currentTopic.concepts = concepts
+            try topicRepository.updateTopic(currentTopic)
+        }
     
     func resetCurrentSession() {
         // Reset current question state

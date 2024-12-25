@@ -9,13 +9,14 @@ extension ExplainViewModel {
         conceptHierarchyService: ConceptHierarchyService? = nil
     ) -> ExplainViewModel {
         let openAIService = OpenAIService.shared
+        let repository = topicRepository ?? TopicRepository()
         
         return ExplainViewModel(
             questionGenerator: questionGenerator ?? OpenAIQuestionGenerationService(openAIService: openAIService),
             gradingService: gradingService ?? OpenAIGradingService(openAIService: openAIService),
             definitionService: definitionService ?? OpenAIConceptDefinitionService(openAIService: openAIService),
             topicRepository: topicRepository ?? TopicRepository(),
-            conceptHierarchyService: conceptHierarchyService ?? DefaultConceptHierarchyService()
+            conceptHierarchyService: conceptHierarchyService ?? DefaultConceptHierarchyService(topicRepository: repository)
         )
     }
     
