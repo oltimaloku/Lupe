@@ -167,12 +167,11 @@
 				DD87B0D12CE8209400FEACC7 /* Info.plist */,
 				DD87B0C02CE7EBDB00FEACC7 /* Common */,
 				DD87B0B52CE1B14800FEACC7 /* Services */,
-				DD87B0B02CE1B03A00FEACC7 /* Views */,
+				DD87B0B02CE1B03A00FEACC7 /* Old */,
 				DD87B0AB2CDD665200FEACC7 /* Models */,
 				DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */,
 				DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */,
 				DD87B0A12CDD65B400FEACC7 /* Preview Content */,
-				DD87B0AE2CE1AFDA00FEACC7 /* ChatViewModel.swift */,
 				DD87B0B82CE1B17400FEACC7 /* Secrets.swift */,
 			);
 			path = ExplainIt;
@@ -199,15 +198,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		DD87B0B02CE1B03A00FEACC7 /* Views */ = {
+		DD87B0B02CE1B03A00FEACC7 /* Old */ = {
 			isa = PBXGroup;
 			children = (
+				DD87B0AE2CE1AFDA00FEACC7 /* ChatViewModel.swift */,
 				DD87B0B12CE1B06000FEACC7 /* ChatView.swift */,
 				DD87B0B32CE1B0C600FEACC7 /* MessageBubbleView.swift */,
 				DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */,
 				DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */,
 			);
-			path = Views;
+			path = Old;
 			sourceTree = "<group>";
 		};
 		DD87B0B52CE1B14800FEACC7 /* Services */ = {

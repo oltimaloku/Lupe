@@ -120,14 +120,6 @@ struct ConceptView: View {
     
     private func startLearningFlow() async {
        await viewModel.startLearningFlow()
-        try? await explainViewModel.generateQuestions(for: viewModel.concept.name)
+        try? await explainViewModel.initializeLearningFlow(for: viewModel.topicId, for: viewModel.concept)
     }
 }
-
-// MARK: - Supporting Views
-
-
-
-
-
-

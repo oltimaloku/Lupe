@@ -1,7 +1,7 @@
 import Foundation
 
 protocol QuestionGenerationService {
-    func generateQuestions(for concept: Concept) async throws -> [Question]
+    func generateQuestionsForConcept(for concept: Concept, in topic: Topic) async throws -> [Question]
     func generateQuestionsForTopic(for topic: String) async throws -> [Question]
 }
 
@@ -12,24 +12,25 @@ class OpenAIQuestionGenerationService: QuestionGenerationService {
         self.openAIService = openAIService
     }
     
-    func generateQuestions(for concept: Concept) async throws -> [Question] {
+    func generateQuestionsForConcept(for concept: Concept, in topic: Topic) async throws -> [Question] {
         let systemMessage = GPTMessage(
             role: "system",
             content: """
-                       Generate questions that test understanding of "\(concept.name)".
+                       Generate questions that test understanding of "\(concept.name)" in the context of the overall topic of \(topic.name).
                        Include questions that:
                        1. Directly test the main concept
                        2. Test relationships with known sub-concepts: \(concept.subConcepts.map { $0.name }.joined(separator: ", "))
                        3. Introduce related new concepts the user hasn't learned yet
                        
                        For each question, clearly mark which concepts it tests and which are new concepts.
+                       Do not return markdown.
                        """
         )
         
         let userGPTMessage = GPTMessage(
             role: "user",
             content: """
-                Generate 3 questions to assess understanding of this concept: "\(concept)". \
+                Generate 3 questions to assess understanding of this concept: "\(concept)".  in the context of \(topic.name)
                 For each question, include:
                 1. The question text
                 2. A model answer
@@ -58,6 +59,8 @@ class OpenAIQuestionGenerationService: QuestionGenerationService {
                         }
                     ]
                 }
+                
+                Do not return markdown.
                 """
         )
         

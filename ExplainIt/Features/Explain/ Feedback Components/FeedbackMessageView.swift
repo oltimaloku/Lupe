@@ -40,7 +40,7 @@ struct FeedbackSegmentView: View {
     
     var body: some View {
         Text(segment.text)
-            .padding(6)
+            .padding()
             .background(segment.feedbackType.color)
             .cornerRadius(8)
             .overlay(

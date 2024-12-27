@@ -24,6 +24,13 @@ class TopicRepository {
         }
     }
     
+    func getTopic(with topicID: UUID) throws -> Topic {
+        guard let topic = topics.first(where: { $0.id == topicID }) else {
+            throw TopicError.topicNotFound
+        }
+        return topic
+    }
+    
     func addTopic(_ topic: Topic) {
         if !topics.contains(where: { $0.id == topic.id }) {
             topics.append(topic)

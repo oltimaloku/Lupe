@@ -122,17 +122,19 @@ struct FeedbackModal: View {
     }
     
     private func fetchDefinitionIfNeeded() {
+        print("test1")
         if let cachedDefinition = viewModel.definitions[feedbackSegment.concept] {
             self.definition = cachedDefinition
             return
         }
-        
+        print("test2")
         guard definition == nil && !isLoading else { return }
         isLoading = true
-        
+        print("test3")
         Task {
             do {
                 let fetchedDefinition = try await viewModel.getDefinition(for: feedbackSegment.concept)
+                print("fetchedDefinition: \(fetchedDefinition)")
                 await MainActor.run {
                     self.definition = fetchedDefinition
                     self.isLoading = false

@@ -79,17 +79,35 @@ class ExplainViewModel: ObservableObject {
     
     // MARK: - Topic and Question Management
     func generateQuestions(for topicName: String) async throws {
-           isLoading = true
-           defer { isLoading = false }
-           print("topicName: \(topicName)")
-           // Generate and store questions
-           currentQuestions = try await questionGenerator.generateQuestionsForTopic(for: topicName)
-           print("currentQuestions for \(topicName): \(currentQuestions)")
-           // Reset responses and feedback
-           userResponses.removeAll()
-           questionFeedback.removeAll()
-           currentQuestionIndex = 0
-       }
+        isLoading = true
+        // sets isLoading to false once the function completes
+        defer { isLoading = false }
+        print("topicName: \(topicName)")
+        // Generate and store questions
+        currentQuestions = try await questionGenerator.generateQuestionsForTopic(for: topicName)
+        print("currentQuestions for \(topicName): \(currentQuestions)")
+        // Reset responses and feedback
+        userResponses.removeAll()
+        questionFeedback.removeAll()
+        currentQuestionIndex = 0
+    }
+    
+    
+    func initializeLearningFlow(for topicId: UUID, for concept: Concept) async throws {
+        isLoading = true
+        defer { isLoading = false }
+        
+        let topic = try topicRepository.getTopic(with: topicId)
+        
+        currentTopic = topic
+        
+        currentQuestions = try await questionGenerator.generateQuestionsForConcept(for: concept, in: topic)
+        
+        userResponses.removeAll()
+        questionFeedback.removeAll()
+        currentQuestionIndex = 0
+        printState()
+    }
        
        // New method just for creating a topic
        func createTopic(name: String) throws -> Topic {
@@ -103,7 +121,6 @@ class ExplainViewModel: ObservableObject {
            
            // Add to repository
            topicRepository.addTopic(newTopic)
-           currentTopic = newTopic
            
            return newTopic
        }
@@ -113,10 +130,7 @@ class ExplainViewModel: ObservableObject {
            isLoading = true
            defer { isLoading = false }
            
-           // Create topic if needed
-           if currentTopic == nil {
-               try createTopic(name: topicName)
-           }
+           currentTopic = try createTopic(name: topicName)
            
            // Generate questions
            try await generateQuestions(for: topicName)
@@ -220,9 +234,9 @@ class ExplainViewModel: ObservableObject {
         if let cachedDefinition = definitions[concept] {
             return cachedDefinition
         }
-        
+        printState()
         guard let topicName = currentTopic?.name else {
-            return ""
+            throw TopicError.topicNotFound
         }
         
         let definition = try await definitionService.getDefinition(for: concept, in: topicName)
@@ -266,5 +280,18 @@ class ExplainViewModel: ObservableObject {
         questionFeedback.removeAll()
         currentQuestions.removeAll()
         showingFeedback = false
+    }
+    
+    func printState() {
+        print("ExplainViewModel State: \n")
+        print("  • isLoading: \(isLoading) \n")
+        print("  • currentTopic: \(String(describing: currentTopic)) \n")
+        print("  • topics: \(topics) \n")
+        print("  • currentQuestions: \(currentQuestions) \n")
+        print("  • userResponses: \(userResponses) \n")
+        print("  • questionFeedback: \(questionFeedback) \n")
+        print("  • showingFeedback: \(showingFeedback) \n")
+        print("  • currentQuestionIndex: \(currentQuestionIndex) \n")
+        print("  • definitions: \(definitions) \n")
     }
 }

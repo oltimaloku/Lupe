@@ -91,22 +91,4 @@ enum FeedbackType: String, Codable {
     }
 }
 
-enum GradingError: LocalizedError {
-    case invalidResponse
-    case invalidGradingCriteria(String)
-    case missingRequiredConcepts([String])
-    case gradingFailed(underlying: Error)
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidResponse:
-            return "Failed to get a valid response from the grading system"
-        case .invalidGradingCriteria(let criteria):
-            return "Invalid grading criteria: \(criteria)"
-        case .missingRequiredConcepts(let concepts):
-            return "Response missing required concepts: \(concepts.joined(separator: ", "))"
-        case .gradingFailed(let error):
-            return "Grading failed: \(error.localizedDescription)"
-        }
-    }
-}
+
