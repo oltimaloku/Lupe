@@ -67,6 +67,8 @@ class OpenAIGradingService: ResponseGradingService {
             """
         )
         
+        print("System message: \n \(systemMessage) \n userGPTMessage: \n \(userGPTMessage)")
+        
         let response = try await openAIService.chatCompletion(
             messages: [systemMessage, userGPTMessage]
         )

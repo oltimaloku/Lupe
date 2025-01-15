@@ -106,7 +106,6 @@ class ExplainViewModel: ObservableObject {
         userResponses.removeAll()
         questionFeedback.removeAll()
         currentQuestionIndex = 0
-        printState()
     }
        
        // New method just for creating a topic
@@ -234,7 +233,7 @@ class ExplainViewModel: ObservableObject {
         if let cachedDefinition = definitions[concept] {
             return cachedDefinition
         }
-        printState()
+        
         guard let topicName = currentTopic?.name else {
             throw TopicError.topicNotFound
         }

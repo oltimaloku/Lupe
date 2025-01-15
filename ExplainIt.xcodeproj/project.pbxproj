@@ -66,6 +66,8 @@
 		DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */; };
 		DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */; };
 		DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */; };
+		DDF903F12D1E2E7B00B9B947 /* ConceptProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */; };
+		DDF903F32D1E2F0100B9B947 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +129,8 @@
 		DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptViewModel.swift; sourceTree = "<group>"; };
 		DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyView.swift; sourceTree = "<group>"; };
 		DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubconceptsSection.swift; sourceTree = "<group>"; };
+		DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProgressRow.swift; sourceTree = "<group>"; };
+		DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +252,7 @@
 		DD87B0D82CEFB35E00FEACC7 /* Explain */ = {
 			isa = PBXGroup;
 			children = (
+				DDF903EF2D1E2E3C00B9B947 /* Review */,
 				DDF903EE2D1CCB7200B9B947 /* Question */,
 				DDF903ED2D1CCB0600B9B947 /*  Feedback Components */,
 				DDF7EFA22D19E75C00347342 /* Components */,
@@ -259,7 +264,6 @@
 				DDAE25D92CF8DC60002C127F /* QuestionFlowContainerView.swift */,
 				DDAE25DD2CF8DCEA002C127F /* ConceptListView.swift */,
 				DDAE25DF2CF8DD31002C127F /* ConceptQuestionsView.swift */,
-				DDF7EF912D162AA400347342 /* ReviewView.swift */,
 			);
 			path = Explain;
 			sourceTree = "<group>";
@@ -367,6 +371,16 @@
 			path = Question;
 			sourceTree = "<group>";
 		};
+		DDF903EF2D1E2E3C00B9B947 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				DDF7EF912D162AA400347342 /* ReviewView.swift */,
+				DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */,
+				DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +482,7 @@
 				DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */,
 				DDF7EF922D162AA400347342 /* ReviewView.swift in Sources */,
 				DDF7EF992D17A99700347342 /* ResponseGradingService.swift in Sources */,
+				DDF903F32D1E2F0100B9B947 /* ReviewViewModel.swift in Sources */,
 				DD87B0BF2CE7E95F00FEACC7 /* PromptView.swift in Sources */,
 				DD87B0AF2CE1AFDA00FEACC7 /* ChatViewModel.swift in Sources */,
 				DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */,
@@ -479,6 +494,7 @@
 				DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */,
 				DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */,
 				DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */,
+				DDF903F12D1E2E7B00B9B947 /* ConceptProgressRow.swift in Sources */,
 				DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */,
 				DD87B0B22CE1B06000FEACC7 /* ChatView.swift in Sources */,
 				DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */,

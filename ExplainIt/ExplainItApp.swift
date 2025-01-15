@@ -11,7 +11,7 @@ import SwiftUI
 struct ExplainItApp: App {
     @StateObject private var diContainer = DIContainer.shared
     
-    var body: some Scene {
+    var body: some Scene { 
         WindowGroup {
             PromptView()
                 .environment(\.diContainer, diContainer)

@@ -13,28 +13,12 @@ struct QuestionFlowContainerView: View {
             if viewModel.isLoading {
                 LoadingIndicatorView()
             } else if showingReview {
-                ReviewView()
-                    .environmentObject(viewModel)
+                ReviewView(explainViewModel: viewModel)
             } else if viewModel.showingFeedback {
                 FeedbackView(
-                    onNextQuestion: {
-                        if hasCompletedLastQuestion {
-                            showingReview = true
-                        } else {
-                            viewModel.setNextQuestion()
-                            viewModel.showExplainView()
-                        }
-                    },
-                    onPreviousQuestion: {
-                        viewModel.setPreviousQuestion()
-                        viewModel.showExplainView()
-                    },
-                    onRetryQuestion: {
-                        if let question = viewModel.currentQuestion {
-                            viewModel.resetFeedback(for: question.id)
-                        }
-                        viewModel.showExplainView()
-                    }
+                    onNextQuestion: handleNextQuestion,
+                    onPreviousQuestion: handlePreviousQuestion,
+                    onRetryQuestion: handleRetryQuestion
                 )
                 .environmentObject(viewModel)
             } else {
@@ -47,8 +31,31 @@ struct QuestionFlowContainerView: View {
     }
     
     private var hasCompletedLastQuestion: Bool {
-        viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1 &&
-        viewModel.showingFeedback &&
-        viewModel.questionFeedback[viewModel.currentQuestion?.id ?? UUID()] != nil
+        guard let currentQuestion = viewModel.currentQuestion else { return false }
+        return viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1 &&
+            viewModel.showingFeedback &&
+            viewModel.questionFeedback[currentQuestion.id] != nil
+    }
+    
+    // MARK: - Action Handlers
+    private func handleNextQuestion() {
+        if hasCompletedLastQuestion {
+            showingReview = true
+        } else {
+            viewModel.setNextQuestion()
+            viewModel.showExplainView()
+        }
+    }
+    
+    private func handlePreviousQuestion() {
+        viewModel.setPreviousQuestion()
+        viewModel.showExplainView()
+    }
+    
+    private func handleRetryQuestion() {
+        if let question = viewModel.currentQuestion {
+            viewModel.resetFeedback(for: question.id)
+        }
+        viewModel.showExplainView()
     }
 }

@@ -16,47 +16,46 @@ struct PromptView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center) {
-                Text("Learn Everything.")
-                    .font(.title2)
-                    .fontWeight(.regular)
-                    .padding(.bottom, 8)
-                
-                HStack(alignment: .center) {
-                    EITextField(text: $inputText, placeholder: "Enter a concept", padding: 16, icon: "brain")
-                        .alignmentGuide(.bottom) { $0[.bottom] }
-                    
-                    Button(action: handleTopicSubmission) {
-                        if viewModel.isLoading {
-                            ProgressView()
-                                .tint(Color(.systemBackground))
-                        } else {
-                            IconBox(
-                                iconName: "arrow.up",
-                                backgroundColor: Color(UIColor.label),
-                                foregroundColor: Color(.systemBackground)
-                            )
-                        }
-                    }
-                    .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty || viewModel.isLoading)
-                }
-                
-                Text("My Concepts")
-                    .font(.title2)
+            VStack(alignment: .center, spacing: 0) {
+                // Title section at the top
+                Text("Lupe")
+                    .font(.custom("Georgia", size: 40))
                     .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 40)
                 
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(viewModel.topics, id: \.id) { topic in
-                            NavigationLink(destination: TopicView(topic: topic)) {
-                                TopicCard(name: topic.name, icon: topic.icon)
+                Spacer()
+                
+                // Main content section
+                VStack(spacing: 20) {
+                    Text("Learn anything.")
+                        .font(.custom("Georgia", size: 16))
+                        .fontWeight(.regular)
+                        .padding(.bottom, 8)
+                    
+                    HStack(alignment: .center) {
+                        EITextField(text: $inputText, placeholder: "Enter a concept", padding: 16, icon: "brain")
+                            .alignmentGuide(.bottom) { $0[.bottom] }
+                        
+                        Button(action: handleTopicSubmission) {
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .tint(Color(.systemBackground))
+                            } else {
+                                IconBox(
+                                    iconName: "arrow.up",
+                                    backgroundColor: Color(UIColor(red: 1.0, green: 87/255, blue: 87/255, alpha: 1)),
+                                    foregroundColor: Color(.systemBackground)
+                                )
                             }
                         }
+                        .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty || viewModel.isLoading)
                     }
                 }
+                .padding(.bottom, 40)
                 
-                // Navigation to question flow
+                Spacer()
+                
+                // Navigation handling
                 if let topicId = currentTopicId {
                     NavigationLink(
                         destination: QuestionFlowContainerView(topicId: topicId),
@@ -77,7 +76,6 @@ struct PromptView: View {
                 if let newTopicId = viewModel.newTopicId {
                     QuestionFlowContainerView(topicId: newTopicId)
                 }
-                
             }
         }
     }
