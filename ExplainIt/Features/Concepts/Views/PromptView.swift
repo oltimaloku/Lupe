@@ -16,55 +16,73 @@ struct PromptView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center, spacing: 0) {
-                // Title section at the top
-                Text("Lupe")
-                    .primaryTitle()
-                    .padding(.top, 40)
+            ZStack {
+                // Background
+                Color(.systemBackground)
+                    .ignoresSafeArea()
                 
-                Spacer()
-                
-                // Main content section
-                VStack(spacing: 20) {
-                    Text("Learn anything.")
-                        .bodyText()
-                        .padding(.bottom, 8)
-                    
-                    HStack(alignment: .center) {
-                        EITextField(text: $inputText, placeholder: "Enter a concept", padding: 16, icon: "brain")
-                            .alignmentGuide(.bottom) { $0[.bottom] }
+                VStack(spacing: 24) {
+                    VStack(spacing: 8) {
+                        Text("Lupe")
+                            .font(.custom("Georgia", size: 48))
+                            .fontWeight(.bold)
                         
-                        Button(action: handleTopicSubmission) {
-                            if viewModel.isLoading {
-                                ProgressView()
-                                    .tint(Color(.systemBackground))
-                            } else {
-                                IconBox(
-                                    iconName: "arrow.up",
-                                    backgroundColor: Theme.accentColor,
-                                    foregroundColor: Color(.systemBackground)
-                                )
+                        Text("Learn anything.")
+                            .font(.custom("Georgia", size: 18))
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.top, 60)
+                    
+                    Spacer()
+                    
+                    // Input Section
+                    VStack(spacing: 16) {
+                        // Search Input
+                        HStack(spacing: 16) {
+                            EITextField(
+                                text: $inputText,
+                                placeholder: "Enter a concept",
+                                padding: 16,
+                                icon: "brain"
+                            )
+                            
+                            Button(action: handleTopicSubmission) {
+                                if viewModel.isLoading {
+                                    ProgressView()
+                                        .tint(.white)
+                                } else {
+                                    Image(systemName: "arrow.up")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.white)
+                                        .frame(width: 50, height: 50)
+                                }
                             }
+                            .background(Theme.accentColor)
+                            .cornerRadius(16)
+                            .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty || viewModel.isLoading)
                         }
-                        .disabled(inputText.trimmingCharacters(in: .whitespaces).isEmpty || viewModel.isLoading)
+                        
+                        // Upload Button
+                        Button(action: {
+                            // Handle upload action
+                        }) {
+                            HStack {
+                                Image(systemName: "paperclip")
+                                Text("Upload your notes").font(.custom("Georgia", size: 16)).bold()
+                            }
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(Theme.accentColor)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                            .background(Theme.accentColor.opacity(0.1))
+                            .cornerRadius(40)
+                        }
                     }
-                }
-                .padding(.bottom, 40)
-                
-                Spacer()
-                
-                // Navigation handling
-                if let topicId = currentTopicId {
-                    NavigationLink(
-                        destination: QuestionFlowContainerView(topicId: topicId),
-                        isActive: $isNavigating
-                    ) {
-                        EmptyView()
-                    }
+                    .padding(.horizontal, 20)
+                    
+                    Spacer()
                 }
             }
-            .padding(20)
-            .background(Color(.systemBackground))
             .alert("Error", isPresented: $showError) {
                 Button("OK", role: .cancel) { }
             } message: {
@@ -73,6 +91,15 @@ struct PromptView: View {
             .navigationDestination(isPresented: $viewModel.isStartingLearningFlow) {
                 if let newTopicId = viewModel.newTopicId {
                     QuestionFlowContainerView(topicId: newTopicId)
+                }
+            }
+            
+            if let topicId = currentTopicId {
+                NavigationLink(
+                    destination: QuestionFlowContainerView(topicId: topicId),
+                    isActive: $isNavigating
+                ) {
+                    EmptyView()
                 }
             }
         }
