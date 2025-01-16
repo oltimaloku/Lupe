@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD231C2F2D3884A000078C30 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C2E2D3884A000078C30 /* Theme.swift */; };
+		DD231C382D388B2900078C30 /* OrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C322D388B2900078C30 /* OrbView.swift */; };
+		DD231C392D388B2900078C30 /* WavyBlobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C332D388B2900078C30 /* WavyBlobView.swift */; };
+		DD231C3A2D388B2900078C30 /* RealisticShadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C342D388B2900078C30 /* RealisticShadows.swift */; };
+		DD231C3B2D388B2900078C30 /* RotatingGlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C352D388B2900078C30 /* RotatingGlowView.swift */; };
+		DD231C3C2D388B2900078C30 /* OrbConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C362D388B2900078C30 /* OrbConfiguration.swift */; };
+		DD231C3D2D388B2900078C30 /* ParticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C372D388B2900078C30 /* ParticlesView.swift */; };
 		DD87B09C2CDD65B300FEACC7 /* ExplainItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */; };
 		DD87B0A02CDD65B400FEACC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */; };
 		DD87B0A32CDD65B400FEACC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B0A22CDD65B400FEACC7 /* Preview Assets.xcassets */; };
@@ -71,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD231C2E2D3884A000078C30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DD231C322D388B2900078C30 /* OrbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbView.swift; sourceTree = "<group>"; };
+		DD231C332D388B2900078C30 /* WavyBlobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WavyBlobView.swift; sourceTree = "<group>"; };
+		DD231C342D388B2900078C30 /* RealisticShadows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealisticShadows.swift; sourceTree = "<group>"; };
+		DD231C352D388B2900078C30 /* RotatingGlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingGlowView.swift; sourceTree = "<group>"; };
+		DD231C362D388B2900078C30 /* OrbConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbConfiguration.swift; sourceTree = "<group>"; };
+		DD231C372D388B2900078C30 /* ParticlesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesView.swift; sourceTree = "<group>"; };
 		DD87B0982CDD65B300FEACC7 /* ExplainIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExplainIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainItApp.swift; sourceTree = "<group>"; };
 		DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +161,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD231C312D388AF600078C30 /* Orb */ = {
+			isa = PBXGroup;
+			children = (
+				DD231C362D388B2900078C30 /* OrbConfiguration.swift */,
+				DD231C322D388B2900078C30 /* OrbView.swift */,
+				DD231C372D388B2900078C30 /* ParticlesView.swift */,
+				DD231C342D388B2900078C30 /* RealisticShadows.swift */,
+				DD231C352D388B2900078C30 /* RotatingGlowView.swift */,
+				DD231C332D388B2900078C30 /* WavyBlobView.swift */,
+			);
+			path = Orb;
+			sourceTree = "<group>";
+		};
 		DD87B08F2CDD65B300FEACC7 = {
 			isa = PBXGroup;
 			children = (
@@ -232,10 +259,12 @@
 		DD87B0C02CE7EBDB00FEACC7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DD231C312D388AF600078C30 /* Orb */,
 				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 				DD87B0C12CE7EBEC00FEACC7 /* EITextField.swift */,
 				DD87B0C52CE7F28900FEACC7 /* IconBox.swift */,
 				DDAE25E12CF8EDAD002C127F /* LoadingIndicatorView.swift */,
+				DD231C2E2D3884A000078C30 /* Theme.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -435,6 +464,7 @@
 				DD87B0EB2CF3C18000FEACC7 /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
 				DD87B0F02CF3C95F00FEACC7 /* XCRemoteSwiftPackageReference "AudioKit" */,
 				DD592B5F2D0B792100C408A6 /* XCRemoteSwiftPackageReference "swift-toolkit" */,
+				DD231C302D388A1000078C30 /* XCRemoteSwiftPackageReference "Orb" */,
 			);
 			productRefGroup = DD87B0992CDD65B300FEACC7 /* Products */;
 			projectDirPath = "";
@@ -465,6 +495,7 @@
 			files = (
 				DDAE25E22CF8EDAD002C127F /* LoadingIndicatorView.swift in Sources */,
 				DD87B0B92CE1B17400FEACC7 /* Secrets.swift in Sources */,
+				DD231C382D388B2900078C30 /* OrbView.swift in Sources */,
 				DD87B0C22CE7EBEC00FEACC7 /* EITextField.swift in Sources */,
 				DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DD87B0CA2CE803EB00FEACC7 /* Concept.swift in Sources */,
@@ -483,14 +514,18 @@
 				DDF7EF922D162AA400347342 /* ReviewView.swift in Sources */,
 				DDF7EF992D17A99700347342 /* ResponseGradingService.swift in Sources */,
 				DDF903F32D1E2F0100B9B947 /* ReviewViewModel.swift in Sources */,
+				DD231C3B2D388B2900078C30 /* RotatingGlowView.swift in Sources */,
 				DD87B0BF2CE7E95F00FEACC7 /* PromptView.swift in Sources */,
+				DD231C392D388B2900078C30 /* WavyBlobView.swift in Sources */,
 				DD87B0AF2CE1AFDA00FEACC7 /* ChatViewModel.swift in Sources */,
 				DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */,
 				DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */,
 				DD87B0C42CE7EFE600FEACC7 /* TopicCard.swift in Sources */,
 				DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */,
 				DDAE25D42CF5420B002C127F /* Recorder.swift in Sources */,
+				DD231C3A2D388B2900078C30 /* RealisticShadows.swift in Sources */,
 				DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */,
+				DD231C3C2D388B2900078C30 /* OrbConfiguration.swift in Sources */,
 				DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */,
 				DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */,
 				DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */,
@@ -504,11 +539,13 @@
 				DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */,
 				DDAE25DC2CF8DCBF002C127F /* ProgressIndicatorView.swift in Sources */,
 				DD87B0E82CF2CEEE00FEACC7 /* ConceptView.swift in Sources */,
+				DD231C2F2D3884A000078C30 /* Theme.swift in Sources */,
 				DDAE25D82CF7FA7B002C127F /* FeedbackView.swift in Sources */,
 				DDF903D72D1BC05500B9B947 /* ProficiencyBadge.swift in Sources */,
 				DDF903D52D1BC01A00B9B947 /* ProficiencyCard.swift in Sources */,
 				DDAE25D62CF5549D002C127F /* Question.swift in Sources */,
 				DD87B0B42CE1B0C600FEACC7 /* MessageBubbleView.swift in Sources */,
+				DD231C3D2D388B2900078C30 /* ParticlesView.swift in Sources */,
 				DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */,
 				DD87B0DA2CEFB37200FEACC7 /* ExplainView.swift in Sources */,
 				DDF903CB2D1A1C5000B9B947 /* ConceptProficiency.swift in Sources */,
@@ -739,6 +776,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD231C302D388A1000078C30 /* XCRemoteSwiftPackageReference "Orb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/metasidd/Orb.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		DD592B5F2D0B792100C408A6 /* XCRemoteSwiftPackageReference "swift-toolkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/readium/swift-toolkit.git";

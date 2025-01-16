@@ -19,8 +19,7 @@ struct PromptView: View {
             VStack(alignment: .center, spacing: 0) {
                 // Title section at the top
                 Text("Lupe")
-                    .font(.custom("Georgia", size: 40))
-                    .fontWeight(.bold)
+                    .primaryTitle()
                     .padding(.top, 40)
                 
                 Spacer()
@@ -28,8 +27,7 @@ struct PromptView: View {
                 // Main content section
                 VStack(spacing: 20) {
                     Text("Learn anything.")
-                        .font(.custom("Georgia", size: 16))
-                        .fontWeight(.regular)
+                        .bodyText()
                         .padding(.bottom, 8)
                     
                     HStack(alignment: .center) {
@@ -43,7 +41,7 @@ struct PromptView: View {
                             } else {
                                 IconBox(
                                     iconName: "arrow.up",
-                                    backgroundColor: Color(UIColor(red: 1.0, green: 87/255, blue: 87/255, alpha: 1)),
+                                    backgroundColor: Theme.accentColor,
                                     foregroundColor: Color(.systemBackground)
                                 )
                             }

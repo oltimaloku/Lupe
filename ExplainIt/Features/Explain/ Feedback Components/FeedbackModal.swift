@@ -1,10 +1,3 @@
-//
-//  FeedbackModal.swift
-//  ExplainIt
-//
-//  Created by Olti Maloku on 2024-11-22.
-//
-
 import SwiftUI
 import MarkdownUI
 
@@ -22,13 +15,13 @@ struct FeedbackModal: View {
                 // Concept Header
                 HStack {
                     Text(feedbackSegment.concept)
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(Theme.Fonts.heading)
+                        .foregroundColor(Color(UIColor.label))
                     Spacer()
                     if showAddConceptButton {
                         Button(action: addConceptToTopic) {
                             Image(systemName: "plus.circle.fill")
-                                .foregroundColor(Color(UIColor.label))
+                                .foregroundColor(Theme.accentColor)
                                 .font(.system(size: 30))
                         }
                     }
@@ -37,8 +30,10 @@ struct FeedbackModal: View {
                 // User's Response
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Your Response:")
-                        .font(.headline)
+                        .font(Theme.Fonts.body)
+                        .fontWeight(.semibold)
                     Text(feedbackSegment.text)
+                        .font(Theme.Fonts.body)
                         .padding()
                         .background(feedbackSegment.feedbackType.color)
                         .cornerRadius(8)
@@ -47,20 +42,24 @@ struct FeedbackModal: View {
                 // Feedback and Key Points
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Feedback:")
-                        .font(.headline)
+                        .font(Theme.Fonts.body)
+                        .fontWeight(.semibold)
                     Text(feedbackSegment.explanation)
+                        .font(Theme.Fonts.body)
                         .padding()
-                        .background(Color.blue.opacity(0.1))
+                        .background(Theme.accentColor.opacity(0.1))
                         .cornerRadius(8)
                     
                     if !feedbackSegment.keyPointsAddressed.isEmpty {
                         Text("Key Points Addressed:")
-                            .font(.headline)
+                            .font(Theme.Fonts.body)
+                            .fontWeight(.semibold)
                         ForEach(feedbackSegment.keyPointsAddressed, id: \.self) { point in
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(Theme.accentColor)
                                 Text(point)
+                                    .font(Theme.Fonts.body)
                             }
                             .padding(.leading)
                         }
@@ -68,12 +67,14 @@ struct FeedbackModal: View {
                     
                     if !feedbackSegment.criteriaMatched.isEmpty {
                         Text("Criteria Met:")
-                            .font(.headline)
+                            .font(Theme.Fonts.body)
+                            .fontWeight(.semibold)
                         ForEach(feedbackSegment.criteriaMatched, id: \.self) { criterion in
                             HStack {
                                 Image(systemName: "star.fill")
-                                    .foregroundColor(.yellow)
+                                    .foregroundColor(Theme.accentColor)
                                 Text(criterion)
+                                    .font(Theme.Fonts.body)
                             }
                             .padding(.leading)
                         }
@@ -88,10 +89,11 @@ struct FeedbackModal: View {
                     HStack {
                         Image(systemName: "book.fill")
                         Text("Generate Definition")
+                            .font(Theme.Fonts.body)
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(Theme.accentColor)
                     .foregroundColor(.white)
                     .cornerRadius(8)
                 }
@@ -102,10 +104,12 @@ struct FeedbackModal: View {
                     VStack(alignment: .leading, spacing: 8) {
                         if let definition = definition {
                             Text("Correct Understanding:")
-                                .font(.headline)
+                                .font(Theme.Fonts.body)
+                                .fontWeight(.semibold)
                             Markdown(definition)
+                                
                                 .padding()
-                                .background(Color.blue.opacity(0.1))
+                                .background(Theme.accentColor.opacity(0.1))
                                 .cornerRadius(8)
                         } else if isLoading {
                             ProgressView("Loading correct explanation...")
@@ -122,19 +126,17 @@ struct FeedbackModal: View {
     }
     
     private func fetchDefinitionIfNeeded() {
-        print("test1")
         if let cachedDefinition = viewModel.definitions[feedbackSegment.concept] {
             self.definition = cachedDefinition
             return
         }
-        print("test2")
+        
         guard definition == nil && !isLoading else { return }
         isLoading = true
-        print("test3")
+        
         Task {
             do {
                 let fetchedDefinition = try await viewModel.getDefinition(for: feedbackSegment.concept)
-                print("fetchedDefinition: \(fetchedDefinition)")
                 await MainActor.run {
                     self.definition = fetchedDefinition
                     self.isLoading = false
@@ -168,5 +170,3 @@ struct FeedbackModal: View {
         }
     }
 }
-
-

@@ -26,8 +26,8 @@ struct FeedbackView: View {
                         // Concepts Section with Proficiency
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Key Concepts")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             EnhancedConceptListView(
                                 segments: feedback.segments,
@@ -46,8 +46,8 @@ struct FeedbackView: View {
                         // Detailed Feedback
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Detailed Feedback")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             FeedbackMessageView(
                                 feedbackAnalysis: feedback,
@@ -59,18 +59,20 @@ struct FeedbackView: View {
                         // Model Answer
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Model Answer")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             Text(viewModel.currentQuestions[viewModel.currentQuestionIndex].modelAnswer)
+                                .font(Theme.Fonts.body)
                                 .padding()
-                                .background(Color.blue.opacity(0.1))
+                                .background(Theme.accentColor.opacity(0.1))
                                 .cornerRadius(8)
                         }
                         .padding(.horizontal)
                         .padding(.bottom)
                     } else {
                         Text("No feedback available")
+                            .font(Theme.Fonts.body)
                             .foregroundColor(.secondary)
                     }
                 }
@@ -84,19 +86,24 @@ struct FeedbackView: View {
                     Button(action: onPreviousQuestion) {
                         Label("Previous", systemImage: "arrow.left")
                             .frame(maxWidth: .infinity)
+                            .font(Theme.Fonts.body)
                     }
                     .disabled(viewModel.currentQuestionIndex == 0)
+                    .tint(Theme.accentColor)
                     
                     Button(action: onRetryQuestion) {
                         Label("Retry", systemImage: "arrow.clockwise")
                             .frame(maxWidth: .infinity)
+                            .font(Theme.Fonts.body)
                     }
+                    .tint(Theme.accentColor)
                     
                     Button(action: onNextQuestion) {
                         Label(isLastQuestion ? "Finish" : "Next", systemImage: "arrow.right")
                             .frame(maxWidth: .infinity)
+                            .font(Theme.Fonts.body)
                     }
-                    
+                    .tint(Theme.accentColor)
                 }
                 .buttonStyle(.bordered)
                 .padding()
@@ -173,7 +180,7 @@ struct ConceptProgressCard: View {
                 // Concept Name and Status
                 HStack {
                     Text(segment.concept)
-                        .font(.headline)
+                        .font(Theme.Fonts.body)
                         .lineLimit(1)
                     Spacer()
                     Image(systemName: feedbackIcon)
@@ -189,11 +196,11 @@ struct ConceptProgressCard: View {
                         
                         HStack {
                             Text(proficiency.masteryLevel.rawValue.capitalized)
-                                .font(.caption)
+                                .font(Theme.Fonts.small)
                                 .foregroundColor(.secondary)
                             Spacer()
                             Text("\(Int(proficiency.proficiencyScore))%")
-                                .font(.caption)
+                                .font(Theme.Fonts.small)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -222,7 +229,7 @@ struct ConceptProgressCard: View {
     
     private func masteryColor(for level: MasteryLevel) -> Color {
         switch level {
-        case .novice: return .red
+        case .novice: return Theme.accentColor
         case .beginner: return .orange
         case .intermediate: return .yellow
         case .advanced: return .blue
@@ -231,15 +238,14 @@ struct ConceptProgressCard: View {
     }
     
     private func getBorderColor(for feedbackType: FeedbackType) -> Color {
-            switch feedbackType {
-            case .correct:
-                return Color.green.opacity(0.8)
-            case .partiallyCorrect:
-                return Color.yellow.opacity(0.8)
-            case .incorrect:
-                return Color.red.opacity(0.8)
-            }
+        switch feedbackType {
+        case .correct:
+            return Color.green.opacity(0.8)
+        case .partiallyCorrect:
+            return Color.yellow.opacity(0.8)
+        case .incorrect:
+            return Theme.accentColor.opacity(0.8)
         }
+    }
 }
-
 
