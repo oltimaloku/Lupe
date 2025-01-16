@@ -25,7 +25,79 @@ extension ExplainViewModel {
         let repository = TopicRepository()
         mockTopics.forEach { repository.addTopic($0) }
         
-        return create(topicRepository: repository)
+        let viewModel = create(topicRepository: repository)
+        
+        // Add mock questions
+        let mockQuestions = [
+            Question(
+                id: UUID(),
+                text: "Explain how calculus is used to solve real-world problems.",
+                modelAnswer: "Calculus has numerous real-world applications. In physics, derivatives help us understand motion and rates of change, while integrals help us calculate total quantities. In engineering, calculus is used to optimize designs and analyze systems. In economics, it helps analyze market trends and maximize profits.",
+                concepts: ["Calculus", "Real-world Applications", "Problem Solving"],
+                rubric: GradingRubric(
+                    keyPoints: [
+                        "Identifies practical applications",
+                        "Demonstrates understanding of calculus concepts",
+                        "Links theory to practice"
+                    ],
+                    requiredConcepts: ["Calculus"],
+                    gradingCriteria: [
+                        GradingCriterion(
+                            description: "Understanding of core concepts",
+                            weight: 0.4,
+                            examples: ["Shows clear understanding of derivatives and integrals"]
+                        ),
+                        GradingCriterion(
+                            description: "Application examples",
+                            weight: 0.3,
+                            examples: ["Provides specific, relevant examples"]
+                        ),
+                        GradingCriterion(
+                            description: "Clarity and coherence",
+                            weight: 0.3,
+                            examples: ["Explains concepts clearly and logically"]
+                        )
+                    ]
+                )
+            ),
+            Question(
+                id: UUID(),
+                text: "Describe the fundamental theorem of calculus and its importance.",
+                modelAnswer: "The Fundamental Theorem of Calculus establishes the relationship between differentiation and integration. It shows that these operations are inverse processes, connecting the concept of the derivative with the definite integral. This theorem is crucial as it provides a practical way to calculate definite integrals using antiderivatives.",
+                concepts: ["Calculus", "Integration", "Differentiation"],
+                rubric: GradingRubric(
+                    keyPoints: [
+                        "States the theorem correctly",
+                        "Explains the relationship between derivatives and integrals",
+                        "Discusses practical implications"
+                    ],
+                    requiredConcepts: ["Calculus", "Integration"],
+                    gradingCriteria: [
+                        GradingCriterion(
+                            description: "Accurate theorem explanation",
+                            weight: 0.5,
+                            examples: ["Correctly states and explains the theorem"]
+                        ),
+                        GradingCriterion(
+                            description: "Understanding implications",
+                            weight: 0.5,
+                            examples: ["Explains why the theorem is important"]
+                        )
+                    ]
+                )
+            )
+        ]
+        
+        // Set up the initial state
+        viewModel.currentQuestions = mockQuestions
+        viewModel.currentTopic = mockTopics.first
+        
+        // Add a mock response for preview
+        if let firstQuestion = mockQuestions.first {
+            viewModel.userResponses[firstQuestion.id] = "Calculus is used extensively in real-world applications. For example, in physics, we use derivatives to calculate velocity and acceleration from position functions. In economics, we use calculus to optimize profit functions and analyze marginal costs..."
+        }
+        
+        return viewModel
     }
     
     private static func getMockTopics() -> [Topic] {

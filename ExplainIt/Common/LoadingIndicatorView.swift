@@ -16,10 +16,10 @@ struct LoadingIndicatorView: View {
             VStack(spacing: 20) {
                 ProgressView() // Default spinning activity indicator
                     .scaleEffect(2) // Increase the size
-                    .progressViewStyle(CircularProgressViewStyle(tint: .blue)) // Custom color
+                    .progressViewStyle(CircularProgressViewStyle(tint: Theme.accentColor)) // Custom color
                 
                 Text("Loading...")
-                    .font(.headline)
+                    .font(Theme.Fonts.georgia(size: 16))
                     .foregroundColor(.gray)
             }
         }

@@ -110,7 +110,7 @@ struct FeedbackView: View {
             }
             .background(Color(.systemBackground))
         }
-        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback")
+        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback").font(Theme.Fonts.heading)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showConceptQuestions) {
             if let concept = selectedConcept {

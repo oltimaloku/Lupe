@@ -90,13 +90,13 @@ struct PromptView: View {
             }
             .navigationDestination(isPresented: $viewModel.isStartingLearningFlow) {
                 if let newTopicId = viewModel.newTopicId {
-                    QuestionFlowContainerView(topicId: newTopicId)
+                    QuestionFlowContainerView(topicId: newTopicId).navigationBarBackButtonHidden(true)
                 }
             }
             
             if let topicId = currentTopicId {
                 NavigationLink(
-                    destination: QuestionFlowContainerView(topicId: topicId),
+                    destination: QuestionFlowContainerView(topicId: topicId).navigationBarBackButtonHidden(true),
                     isActive: $isNavigating
                 ) {
                     EmptyView()

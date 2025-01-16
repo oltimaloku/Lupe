@@ -3,6 +3,7 @@ import SwiftUI
 struct QuestionFlowContainerView: View {
     @ViewModelProvider private var viewModel: ExplainViewModel
     @State private var showingReview = false
+    @Environment(\.dismiss) private var dismiss
     
     init(topicId: UUID) {
         _viewModel = ViewModelProvider(topicId: topicId)
@@ -27,7 +28,18 @@ struct QuestionFlowContainerView: View {
                 }
                 .environmentObject(viewModel)
             }
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                RoundedButton(title: "End") {
+                    dismiss()
+                }
+            }
+            // You can also add trailing items if needed
+            ToolbarItem(placement: .navigationBarTrailing) {
+                // Add any trailing buttons here
+            }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var hasCompletedLastQuestion: Bool {
@@ -59,3 +71,5 @@ struct QuestionFlowContainerView: View {
         viewModel.showExplainView()
     }
 }
+
+
