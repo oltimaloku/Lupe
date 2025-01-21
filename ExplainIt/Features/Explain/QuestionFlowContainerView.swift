@@ -1,54 +1,75 @@
 import SwiftUI
 
 struct QuestionFlowContainerView: View {
-    @EnvironmentObject private var viewModel: ExplainViewModel
+    @ViewModelProvider private var viewModel: ExplainViewModel
     @State private var showingReview = false
+    @Environment(\.dismiss) private var dismiss
     
-    private var isLastQuestion: Bool {
-        viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1
-    }
-    
-    private var hasCompletedLastQuestion: Bool {
-        isLastQuestion &&
-        viewModel.showingFeedback &&
-        viewModel.questionFeedback[viewModel.currentQuestion?.id ?? UUID()] != nil
+    init(topicId: UUID) {
+        _viewModel = ViewModelProvider(topicId: topicId)
     }
     
     var body: some View {
-        NavigationStack {
+        Group {
             if viewModel.isLoading {
                 LoadingIndicatorView()
-            }
-            else if showingReview {
-                ReviewView()
-                    .environmentObject(viewModel)
-            }
-            else if viewModel.showingFeedback {
+            } else if showingReview {
+                ReviewView(explainViewModel: viewModel)
+            } else if viewModel.showingFeedback {
                 FeedbackView(
-                    onNextQuestion: {
-                        if hasCompletedLastQuestion {
-                            showingReview = true
-                        } else {
-                            viewModel.setNextQuestion()
-                            viewModel.showExplainView()
-                        }
-                    },
-                    onPreviousQuestion: {
-                        viewModel.setPreviousQuestion()
-                        viewModel.showExplainView()
-                    },
-                    onRetryQuestion: {
-                        if let question = viewModel.currentQuestion {
-                            viewModel.resetFeedback(for: question.id)
-                        }
-                        viewModel.showExplainView()
-                    }
-                ).environmentObject(viewModel)
+                    onNextQuestion: handleNextQuestion,
+                    onPreviousQuestion: handlePreviousQuestion,
+                    onRetryQuestion: handleRetryQuestion
+                )
+                .environmentObject(viewModel)
             } else {
                 ExplainView {
                     viewModel.showFeedbackView()
-                }.environmentObject(viewModel)
+                }
+                .environmentObject(viewModel)
+            }
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                RoundedButton(title: "End") {
+                    dismiss()
+                }
+            }
+            // You can also add trailing items if needed
+            ToolbarItem(placement: .navigationBarTrailing) {
+                // Add any trailing buttons here
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var hasCompletedLastQuestion: Bool {
+        guard let currentQuestion = viewModel.currentQuestion else { return false }
+        return viewModel.currentQuestionIndex >= viewModel.currentQuestions.count - 1 &&
+            viewModel.showingFeedback &&
+            viewModel.questionFeedback[currentQuestion.id] != nil
+    }
+    
+    // MARK: - Action Handlers
+    private func handleNextQuestion() {
+        if hasCompletedLastQuestion {
+            showingReview = true
+        } else {
+            viewModel.setNextQuestion()
+            viewModel.showExplainView()
+        }
+    }
+    
+    private func handlePreviousQuestion() {
+        viewModel.setPreviousQuestion()
+        viewModel.showExplainView()
+    }
+    
+    private func handleRetryQuestion() {
+        if let question = viewModel.currentQuestion {
+            viewModel.resetFeedback(for: question.id)
+        }
+        viewModel.showExplainView()
     }
 }
+
+

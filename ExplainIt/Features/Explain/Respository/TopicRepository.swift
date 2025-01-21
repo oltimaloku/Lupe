@@ -24,6 +24,13 @@ class TopicRepository {
         }
     }
     
+    func getTopic(with topicID: UUID) throws -> Topic {
+        guard let topic = topics.first(where: { $0.id == topicID }) else {
+            throw TopicError.topicNotFound
+        }
+        return topic
+    }
+    
     func addTopic(_ topic: Topic) {
         if !topics.contains(where: { $0.id == topic.id }) {
             topics.append(topic)
@@ -51,25 +58,34 @@ class TopicRepository {
         saveTopics()
     }
     
-    func addConceptToTopic(_ concept: Concept, topicId: UUID) throws {
-        guard var topic = topics.first(where: { $0.id == topicId }) else {
-            throw TopicError.topicNotFound
+    func addConceptToTopic(_ concept: Concept, topicId: UUID, parentConceptId: UUID? = nil) throws {
+            guard var topic = topics.first(where: { $0.id == topicId }) else {
+                throw TopicError.topicNotFound
+            }
+            
+            // Check if concept already exists
+            if topic.concepts.contains(where: { $0.name.lowercased() == concept.name.lowercased() }) {
+                throw TopicError.conceptAlreadyExists(concept.name)
+            }
+            
+            var newConcept = concept
+            if let parentId = parentConceptId {
+                // Set parent ID and update metadata
+                newConcept.parentConceptId = parentId
+                if let parentIndex = topic.concepts.firstIndex(where: { $0.id == parentId }) {
+                    var parentConcept = topic.concepts[parentIndex]
+                    parentConcept.subConcepts.append(newConcept)
+                    topic.concepts[parentIndex] = parentConcept
+                }
+            } else {
+                // Add as root concept
+                topic.concepts.append(newConcept)
+            }
+            
+            // Update topic
+            if let index = topics.firstIndex(where: { $0.id == topicId }) {
+                topics[index] = topic
+                saveTopics()
+            }
         }
-        
-        // Check if concept already exists
-        if topic.concepts.contains(where: { $0.name.lowercased() == concept.name.lowercased() }) {
-            throw TopicError.conceptAlreadyExists(concept.name)
-        }
-        
-        // Create updated topic with new concept
-        var updatedConcepts = topic.concepts
-        updatedConcepts.append(concept)
-        let updatedTopic = Topic(id: topic.id, name: topic.name, icon: topic.icon, concepts: updatedConcepts)
-        
-        // Update topics array
-        if let index = topics.firstIndex(where: { $0.id == topicId }) {
-            topics[index] = updatedTopic
-            saveTopics()
-        }
-    }
 }

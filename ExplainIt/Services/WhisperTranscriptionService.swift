@@ -161,6 +161,7 @@ class WhisperTranscriptionService: NSObject, ObservableObject, AVAudioRecorderDe
         self.logger.info("✅ Completed transcription with \(segments.count) segments")
         DispatchQueue.main.async {
             self.recognizedText = text
+            self.handleBlankAudio()
             self.onTranscriptionComplete?(text)
         }
     }
@@ -306,6 +307,19 @@ class WhisperTranscriptionService: NSObject, ObservableObject, AVAudioRecorderDe
                 logger.error("Error code: \(avError.code.rawValue)")
             }
             completionHandler(.failure(error))
+        }
+    }
+    
+    func handleBlankAudio() {
+        logger.info("Checking for [BLANK_AUDIO] in transcribed text")
+        if recognizedText.trimmingCharacters(in: .whitespacesAndNewlines) == "[BLANK_AUDIO]" {
+            logger.warning("❌ Transcription contains only [BLANK_AUDIO] - no meaningful audio detected")
+            self.recognizedText = ""
+            onTranscriptionComplete?("[BLANK_AUDIO] detected: No transcription available")
+        } else if recognizedText.contains("[BLANK_AUDIO]") {
+            logger.info("🔄 Removing [BLANK_AUDIO] from transcription")
+            self.recognizedText = self.recognizedText.replacingOccurrences(of: "[BLANK_AUDIO]", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            logger.info("🔄 recognized text: \(self.recognizedText)")
         }
     }
     

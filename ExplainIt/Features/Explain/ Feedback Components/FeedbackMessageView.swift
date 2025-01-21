@@ -14,19 +14,16 @@ struct FeedbackMessageView: View {
                 )
             }
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
     }
     
     private func getPercentageColour(percent: Double) -> Color {
         switch percent {
         case ..<0.5:
-            return .red
+            return Theme.accentColor
         case 0.5..<0.75:
             return .orange
         case 0.75...0.95:
-            return Color(red: 218/255, green: 165/255, blue: 32/255)
+            return Theme.accentColor
         case 0.95...1:
             return .green
         default:
@@ -43,7 +40,8 @@ struct FeedbackSegmentView: View {
     
     var body: some View {
         Text(segment.text)
-            .padding(6)
+            .font(Theme.Fonts.body)
+            .padding()
             .background(segment.feedbackType.color)
             .cornerRadius(8)
             .overlay(
@@ -62,13 +60,15 @@ struct FeedbackSegmentView: View {
     }
     
     private func getBorderColor(for feedbackType: FeedbackType) -> Color {
-            switch feedbackType {
-            case .correct:
-                return Color.green.opacity(0.8)
-            case .partiallyCorrect:
-                return Color.yellow.opacity(0.8)
-            case .incorrect:
-                return Color.red.opacity(0.8)
-            }
+        switch feedbackType {
+        case .correct:
+            return Color.green.opacity(0.8)
+        case .partiallyCorrect:
+            return Color.yellow.opacity(0.8)
+        case .incorrect:
+            return Theme.accentColor.opacity(0.8)
+        case .irrelevant:
+            return .gray.opacity(0.8)
         }
+    }
 }

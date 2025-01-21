@@ -9,137 +9,182 @@ struct ExplainView: View {
     let onAnswerSubmitted: () -> Void
     
     private let logger = Logger(subsystem: "com.app.ExplainView", category: "UI")
+    private let accentColor = Color(UIColor(red: 1.0, green: 87/255, blue: 87/255, alpha: 1))
     
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack {
-                    if let question = viewModel.currentQuestion {
-                        // Question Text
-                        Text(question.text)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(UIColor.label))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 24)
-                            .padding(.bottom, 20)
-                        
-                        // Concepts
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(question.concepts, id: \.self) { concept in
-                                    Text(concept)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 6)
-                                        .background(Color.blue.opacity(0.1))
-                                        .cornerRadius(12)
-                                }
-                            }
-                            .padding(.horizontal, 24)
-                        }
-                        
-                        // Response Input Area
-                        VStack(spacing: 16) {
-                            if isEditing {
-                                TextEditor(text: $userResponse)
-                                    .frame(height: 150)
-                                    .padding(8)
-                                    .background(Color(UIColor.systemBackground))
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                    )
-                            } else {
-                                Text(userResponse.isEmpty ? "Tap to enter your answer or use the microphone" : userResponse)
-                                    .padding()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color(UIColor.systemBackground))
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                    )
-                            }
-                            
-                            // Edit/Done Button
-                            Button(action: {
-                                isEditing.toggle()
-                            }) {
-                                Text(isEditing ? "Done" : "Edit")
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 8)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(8)
-                            }
-                        }
-                        .padding(.horizontal, 24)
-                        
-                        // Submit Button
-                        if !userResponse.isEmpty {
-                            Button(action: submitResponse) {
-                                HStack {
-                                    Image(systemName: "paperplane.fill")
-                                    Text("Submit Answer")
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                            }
-                            .padding(.horizontal, 24)
-                            .padding(.top, 16)
-                        }
-                        
-                        if viewModel.isLoading {
-                            ProgressView("Analyzing your response...")
-                                .foregroundColor(Color(UIColor.label))
-                                .padding(.top, 20)
-                        }
-                    } else {
-                        Text("You've completed all questions!")
-                            .font(.title)
-                            .fontWeight(.bold)
-                    }
-                }
-                .onAppear {
-                    speechRecognizer.requestAuthorization()
-                    if let question = viewModel.currentQuestion,
-                       let savedResponse = viewModel.getResponse(for: question.id) {
-                        userResponse = savedResponse
-                    }
-                }
+        ZStack {
+            mainContent
+            if speechRecognizer.isRecording || viewModel.isLoading {
+                loadingOverlay
             }
-            
-            Spacer()
-            
-            // Voice Recording Button
-            recordButton
-                .padding(.bottom, 20)
         }
         .navigationTitle("Question \(viewModel.currentQuestionIndex + 1)")
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: speechRecognizer.recognizedText) { newText in
             if !newText.isEmpty {
                 userResponse = newText
-                isEditing = true
+            }
+        }
+        .onAppear {
+            setupInitialState()
+        }
+    }
+    
+    // MARK: - Main Content Components
+    
+    private var mainContent: some View {
+        VStack {
+            ScrollView {
+                VStack(spacing: 20) {
+                    if let question = viewModel.currentQuestion {
+                        questionContent(question)
+                    } else {
+                        completionMessage
+                    }
+                }
+            }
+            Spacer()
+            HStack(spacing: 30) {
+                
+                
+                recordButton
+                    .transition(.move(edge: .trailing))
+                if !userResponse.isEmpty {
+                    submitButton
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
+            }
+            .padding(20)
+            .animation(.spring(response: 0.5, dampingFraction: 0.7), value: !userResponse.isEmpty)
+            
+        }
+    }
+    
+    private func questionContent(_ question: Question) -> some View {
+        VStack(spacing: 20) {
+            questionHeader(question)
+            conceptsList(question)
+            responseArea
+            
+            
+        }
+    }
+    
+    // MARK: - Question Components
+    
+    private func questionHeader(_ question: Question) -> some View {
+        Text(question.text)
+            .heading()
+            .fontWeight(.bold)
+            .foregroundColor(Color(UIColor.label))
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 10)
+            .padding(.top, 10)
+    }
+    
+    private func conceptsList(_ question: Question) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(question.concepts, id: \.self) { concept in
+                    conceptTag(concept)
+                }
+            }
+            .padding(.horizontal, 24)
+        }
+    }
+    
+    private func conceptTag(_ concept: String) -> some View {
+        Text(concept)
+            .font(Theme.Fonts.small)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(Theme.accentColor.opacity(0.1))
+            .cornerRadius(12)
+    }
+    
+    // MARK: - Response Components
+    
+    private var responseArea: some View {
+        ZStack(alignment: .center) {
+            TextEditor(text: $userResponse)
+                .font(Theme.Fonts.body)
+                .frame(minHeight: UIScreen.main.bounds.height * 0.4)
+                .padding(.horizontal, 24)
+            
+            if userResponse.isEmpty || userResponse == "" {
+                Text("Tap to type your answer or use the microphone")
+                    .font(Theme.Fonts.body)
+                    .foregroundColor(.gray.opacity(0.5))
+                    .allowsHitTesting(false) // This lets touches pass through to the TextEditor
             }
         }
     }
+    
+    private var submitButton: some View {
+        Button(action: submitResponse) {
+            HStack {
+                Image(systemName: "paperplane.fill")
+                Text("Evaluate")
+                    .font(.custom("Georgia", size: 16)).bold()
+            }
+            .frame(maxWidth: 150)
+            .padding()
+            .background(accentColor)
+            .foregroundColor(.white)
+            .cornerRadius(20)
+        }
+    }
+    
+    // MARK: - Loading Overlay
+    
+    private var loadingOverlay: some View {
+        VStack {
+            OrbView(configuration: OrbConfiguration(
+                backgroundColors: [Theme.accentColor],
+                glowColor: Theme.accentColor,
+                coreGlowIntensity: 1.5,
+                speed: 120
+            ))
+            .frame(width: 120, height: 120)
+            
+            Text(speechRecognizer.isRecording ? "Listening..." : "Transcribing...")
+                .font(.custom("Georgia", size: 16))
+                .foregroundColor(Theme.accentColor)
+                .padding(.top, 8)
+        }
+    }
+    
+    private var completionMessage: some View {
+        Text("You've completed all questions!")
+            .heading()
+            .fontWeight(.bold)
+    }
+    
+    // MARK: - Recording Button
     
     private var recordButton: some View {
         Button(action: handleRecordButton) {
             ZStack {
                 Circle()
-                    .fill(speechRecognizer.isRecording ? Color.red : Color.blue)
+                    .fill(speechRecognizer.isRecording ? Color.red : Theme.accentColor)
                     .frame(width: 70, height: 70)
-                    .shadow(color: speechRecognizer.isRecording ? Color.red.opacity(0.7) : Color.blue.opacity(0.7), radius: 10, x: 0, y: 5)
+                    .shadow(color: speechRecognizer.isRecording ? Color.red.opacity(0.7) : Theme.accentColor.opacity(0.7), radius: 10, x: 0, y: 5)
                 
                 Image(systemName: "mic.fill")
                     .font(.system(size: 30, weight: .bold))
                     .foregroundColor(.white)
             }
+        }
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func setupInitialState() {
+        speechRecognizer.requestAuthorization()
+        if let question = viewModel.currentQuestion,
+           let savedResponse = viewModel.getResponse(for: question.id) {
+            userResponse = savedResponse
         }
     }
     
@@ -159,17 +204,35 @@ struct ExplainView: View {
         guard let question = viewModel.currentQuestion else { return }
         
         Task {
-            // Save the response
             viewModel.saveResponse(for: question, text: userResponse)
-            
-            // Grade the response
             await viewModel.gradeResponse(
                 question: question,
                 text: userResponse
             )
-            
-            // Navigate to feedback view
             onAnswerSubmitted()
         }
+    }
+}
+
+// MARK: - Supporting Types
+
+struct PlaceholderViewModifier: ViewModifier {
+    let placeholder: () -> any View
+    let shouldShow: Bool
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .topLeading) {
+            if shouldShow {
+                AnyView(placeholder())
+            }
+            content
+        }
+    }
+}
+
+#Preview {
+    NavigationView {
+        ExplainView(onAnswerSubmitted: {})
+            .environmentObject(ExplainViewModel.createForPreview())
     }
 }

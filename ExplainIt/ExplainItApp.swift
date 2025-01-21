@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ExplainItApp: App {
-    var body: some Scene {
+    @StateObject private var diContainer = DIContainer.shared
+    
+    var body: some Scene { 
         WindowGroup {
             PromptView()
+                .environment(\.diContainer, diContainer)
         }
     }
 }

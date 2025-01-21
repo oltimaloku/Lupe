@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD231C2F2D3884A000078C30 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C2E2D3884A000078C30 /* Theme.swift */; };
+		DD231C382D388B2900078C30 /* OrbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C322D388B2900078C30 /* OrbView.swift */; };
+		DD231C392D388B2900078C30 /* WavyBlobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C332D388B2900078C30 /* WavyBlobView.swift */; };
+		DD231C3A2D388B2900078C30 /* RealisticShadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C342D388B2900078C30 /* RealisticShadows.swift */; };
+		DD231C3B2D388B2900078C30 /* RotatingGlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C352D388B2900078C30 /* RotatingGlowView.swift */; };
+		DD231C3C2D388B2900078C30 /* OrbConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C362D388B2900078C30 /* OrbConfiguration.swift */; };
+		DD231C3D2D388B2900078C30 /* ParticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C372D388B2900078C30 /* ParticlesView.swift */; };
+		DD231C3F2D38B2E600078C30 /* EndButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C3E2D38B2E600078C30 /* EndButton.swift */; };
 		DD87B09C2CDD65B300FEACC7 /* ExplainItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */; };
 		DD87B0A02CDD65B400FEACC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */; };
 		DD87B0A32CDD65B400FEACC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B0A22CDD65B400FEACC7 /* Preview Assets.xcassets */; };
@@ -26,7 +34,6 @@
 		DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */; };
 		DD87B0D02CE81F7A00FEACC7 /* SpeechRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0CF2CE81F7A00FEACC7 /* SpeechRecognitionService.swift */; };
 		DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */; };
-		DD87B0D72CEFB35900FEACC7 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D62CEFB35900FEACC7 /* LearnView.swift */; };
 		DD87B0DA2CEFB37200FEACC7 /* ExplainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */; };
 		DD87B0DC2CEFB68B00FEACC7 /* ExplainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0DB2CEFB68B00FEACC7 /* ExplainViewModel.swift */; };
 		DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */; };
@@ -54,10 +61,32 @@
 		DDF7EFA12D17AC6F00347342 /* ExplainViewModel+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7EFA02D17AC6F00347342 /* ExplainViewModel+Factory.swift */; };
 		DDF903CB2D1A1C5000B9B947 /* ConceptProficiency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CA2D1A1C5000B9B947 /* ConceptProficiency.swift */; };
 		DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */; };
-		DDF903CF2D1A8E2400B9B947 /* ConceptHierarchyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */; };
+		DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */; };
+		DDF903D32D1BBFF600B9B947 /* PracticeHistorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */; };
+		DDF903D52D1BC01A00B9B947 /* ProficiencyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */; };
+		DDF903D72D1BC05500B9B947 /* ProficiencyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */; };
+		DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */; };
+		DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */; };
+		DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */; };
+		DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */; };
+		DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */; };
+		DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */; };
+		DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */; };
+		DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */; };
+		DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */; };
+		DDF903F12D1E2E7B00B9B947 /* ConceptProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */; };
+		DDF903F32D1E2F0100B9B947 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD231C2E2D3884A000078C30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DD231C322D388B2900078C30 /* OrbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbView.swift; sourceTree = "<group>"; };
+		DD231C332D388B2900078C30 /* WavyBlobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WavyBlobView.swift; sourceTree = "<group>"; };
+		DD231C342D388B2900078C30 /* RealisticShadows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealisticShadows.swift; sourceTree = "<group>"; };
+		DD231C352D388B2900078C30 /* RotatingGlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingGlowView.swift; sourceTree = "<group>"; };
+		DD231C362D388B2900078C30 /* OrbConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbConfiguration.swift; sourceTree = "<group>"; };
+		DD231C372D388B2900078C30 /* ParticlesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesView.swift; sourceTree = "<group>"; };
+		DD231C3E2D38B2E600078C30 /* EndButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndButton.swift; sourceTree = "<group>"; };
 		DD87B0982CDD65B300FEACC7 /* ExplainIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExplainIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainItApp.swift; sourceTree = "<group>"; };
 		DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,7 +108,6 @@
 		DD87B0CF2CE81F7A00FEACC7 /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
 		DD87B0D12CE8209400FEACC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnOrExplain.swift; sourceTree = "<group>"; };
-		DD87B0D62CEFB35900FEACC7 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainView.swift; sourceTree = "<group>"; };
 		DD87B0DB2CEFB68B00FEACC7 /* ExplainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExplainViewModel.swift; path = ../ExplainViewModel.swift; sourceTree = "<group>"; };
 		DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModal.swift; sourceTree = "<group>"; };
@@ -104,7 +132,21 @@
 		DDF7EFA02D17AC6F00347342 /* ExplainViewModel+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExplainViewModel+Factory.swift"; sourceTree = "<group>"; };
 		DDF903CA2D1A1C5000B9B947 /* ConceptProficiency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProficiency.swift; sourceTree = "<group>"; };
 		DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProficiencyManager.swift; sourceTree = "<group>"; };
-		DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyService.swift; sourceTree = "<group>"; };
+		DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyService.swift; sourceTree = "<group>"; };
+		DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeHistorySection.swift; sourceTree = "<group>"; };
+		DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProficiencyCard.swift; sourceTree = "<group>"; };
+		DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProficiencyBadge.swift; sourceTree = "<group>"; };
+		DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptViewModel.swift; sourceTree = "<group>"; };
+		DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbViewModel.swift; sourceTree = "<group>"; };
+		DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCrumbView.swift; sourceTree = "<group>"; };
+		DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
+		DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptViewModel.swift; sourceTree = "<group>"; };
+		DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptHierarchyView.swift; sourceTree = "<group>"; };
+		DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubconceptsSection.swift; sourceTree = "<group>"; };
+		DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptProgressRow.swift; sourceTree = "<group>"; };
+		DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +163,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD231C312D388AF600078C30 /* Orb */ = {
+			isa = PBXGroup;
+			children = (
+				DD231C362D388B2900078C30 /* OrbConfiguration.swift */,
+				DD231C322D388B2900078C30 /* OrbView.swift */,
+				DD231C372D388B2900078C30 /* ParticlesView.swift */,
+				DD231C342D388B2900078C30 /* RealisticShadows.swift */,
+				DD231C352D388B2900078C30 /* RotatingGlowView.swift */,
+				DD231C332D388B2900078C30 /* WavyBlobView.swift */,
+			);
+			path = Orb;
+			sourceTree = "<group>";
+		};
 		DD87B08F2CDD65B300FEACC7 = {
 			isa = PBXGroup;
 			children = (
@@ -145,14 +200,12 @@
 				DD87B0D12CE8209400FEACC7 /* Info.plist */,
 				DD87B0C02CE7EBDB00FEACC7 /* Common */,
 				DD87B0B52CE1B14800FEACC7 /* Services */,
-				DD87B0B02CE1B03A00FEACC7 /* Views */,
+				DD87B0B02CE1B03A00FEACC7 /* Old */,
 				DD87B0AB2CDD665200FEACC7 /* Models */,
 				DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */,
 				DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */,
 				DD87B0A12CDD65B400FEACC7 /* Preview Content */,
-				DD87B0AE2CE1AFDA00FEACC7 /* ChatViewModel.swift */,
 				DD87B0B82CE1B17400FEACC7 /* Secrets.swift */,
-				DD87B0C32CE7EFE600FEACC7 /* TopicCard.swift */,
 			);
 			path = ExplainIt;
 			sourceTree = "<group>";
@@ -178,18 +231,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		DD87B0B02CE1B03A00FEACC7 /* Views */ = {
+		DD87B0B02CE1B03A00FEACC7 /* Old */ = {
 			isa = PBXGroup;
 			children = (
-				DD87B0BE2CE7E95F00FEACC7 /* PromptView.swift */,
+				DD87B0AE2CE1AFDA00FEACC7 /* ChatViewModel.swift */,
 				DD87B0B12CE1B06000FEACC7 /* ChatView.swift */,
 				DD87B0B32CE1B0C600FEACC7 /* MessageBubbleView.swift */,
 				DD87B0CD2CE81DBF00FEACC7 /* SpeechRecognitionView.swift */,
 				DD87B0D22CEC8C1D00FEACC7 /* LearnOrExplain.swift */,
-				DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */,
-				DD87B0DF2CF19B2B00FEACC7 /* FeedbackMessageView.swift */,
 			);
-			path = Views;
+			path = Old;
 			sourceTree = "<group>";
 		};
 		DD87B0B52CE1B14800FEACC7 /* Services */ = {
@@ -200,6 +251,9 @@
 				DD87B0E92CF3C15800FEACC7 /* WhisperTranscriptionService.swift */,
 				DDAE25D32CF5420B002C127F /* Recorder.swift */,
 				DDF903CC2D1A1CB700B9B947 /* ConceptProficiencyManager.swift */,
+				DDF903D02D1BA1F800B9B947 /* ConceptHierarchyService.swift */,
+				DDF903E22D1CA8BC00B9B947 /* DIContainer.swift */,
+				DDF903E42D1CA91500B9B947 /* ViewModelProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -207,9 +261,13 @@
 		DD87B0C02CE7EBDB00FEACC7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DD231C312D388AF600078C30 /* Orb */,
+				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 				DD87B0C12CE7EBEC00FEACC7 /* EITextField.swift */,
 				DD87B0C52CE7F28900FEACC7 /* IconBox.swift */,
 				DDAE25E12CF8EDAD002C127F /* LoadingIndicatorView.swift */,
+				DD231C2E2D3884A000078C30 /* Theme.swift */,
+				DD231C3E2D38B2E600078C30 /* EndButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -219,33 +277,25 @@
 			children = (
 				DD87B0E42CF2844D00FEACC7 /* Concepts */,
 				DD87B0D82CEFB35E00FEACC7 /* Explain */,
-				DD87B0D52CEFB34900FEACC7 /* Learn */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		DD87B0D52CEFB34900FEACC7 /* Learn */ = {
-			isa = PBXGroup;
-			children = (
-				DD87B0D62CEFB35900FEACC7 /* LearnView.swift */,
-			);
-			path = Learn;
 			sourceTree = "<group>";
 		};
 		DD87B0D82CEFB35E00FEACC7 /* Explain */ = {
 			isa = PBXGroup;
 			children = (
+				DDF903EF2D1E2E3C00B9B947 /* Review */,
+				DDF903EE2D1CCB7200B9B947 /* Question */,
+				DDF903ED2D1CCB0600B9B947 /*  Feedback Components */,
 				DDF7EFA22D19E75C00347342 /* Components */,
 				DDF7EF9F2D17AC3800347342 /* Extensions */,
 				DDF7EF9C2D17A9C000347342 /* Respository */,
 				DDF7EF952D17A95700347342 /* Services */,
 				DDF7EF932D17A59E00347342 /* ViewModel */,
 				DD87B0D92CEFB37200FEACC7 /* ExplainView.swift */,
-				DDAE25D72CF7FA7B002C127F /* FeedbackView.swift */,
 				DDAE25D92CF8DC60002C127F /* QuestionFlowContainerView.swift */,
 				DDAE25DD2CF8DCEA002C127F /* ConceptListView.swift */,
 				DDAE25DF2CF8DD31002C127F /* ConceptQuestionsView.swift */,
-				DDF7EF912D162AA400347342 /* ReviewView.swift */,
 			);
 			path = Explain;
 			sourceTree = "<group>";
@@ -253,8 +303,13 @@
 		DD87B0E42CF2844D00FEACC7 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
-				DD87B0E52CF284DC00FEACC7 /* TopicView.swift */,
-				DD87B0E72CF2CEEE00FEACC7 /* ConceptView.swift */,
+				DDF903E82D1CC88800B9B947 /* Components */,
+				DDF903E12D1CA67400B9B947 /* Views */,
+				DDF903D82D1C9A7800B9B947 /* ViewModel */,
+				DDF903D22D1BBFF600B9B947 /* PracticeHistorySection.swift */,
+				DDF903D42D1BC01A00B9B947 /* ProficiencyCard.swift */,
+				DDF903D62D1BC05500B9B947 /* ProficiencyBadge.swift */,
+				DDF903DF2D1C9C1400B9B947 /* BreadCrumbView.swift */,
 			);
 			path = Concepts;
 			sourceTree = "<group>";
@@ -273,7 +328,6 @@
 				DDF7EF962D17A97A00347342 /* QuestionGenerationService.swift */,
 				DDF7EF982D17A99700347342 /* ResponseGradingService.swift */,
 				DDF7EF9A2D17A9AA00347342 /* ConceptDefinitionService.swift */,
-				DDF903CE2D1A8E2400B9B947 /* ConceptHierarchyService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -297,9 +351,66 @@
 		DDF7EFA22D19E75C00347342 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		DDF903D82D1C9A7800B9B947 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDF903D92D1C9A8D00B9B947 /* TopicViewModel.swift */,
+				DDF903DB2D1C9AA100B9B947 /* ConceptViewModel.swift */,
+				DDF903DD2D1C9C0100B9B947 /* BreadCrumbViewModel.swift */,
+				DDF903E62D1CAA4D00B9B947 /* PromptViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDF903E12D1CA67400B9B947 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B0E72CF2CEEE00FEACC7 /* ConceptView.swift */,
+				DD87B0E52CF284DC00FEACC7 /* TopicView.swift */,
+				DD87B0BE2CE7E95F00FEACC7 /* PromptView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDF903E82D1CC88800B9B947 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B0C32CE7EFE600FEACC7 /* TopicCard.swift */,
+				DDF903E92D1CC89A00B9B947 /* ConceptHierarchyView.swift */,
+				DDF903EB2D1CC91A00B9B947 /* SubconceptsSection.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		DDF903ED2D1CCB0600B9B947 /*  Feedback Components */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B0DF2CF19B2B00FEACC7 /* FeedbackMessageView.swift */,
+				DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */,
+				DDAE25D72CF7FA7B002C127F /* FeedbackView.swift */,
+			);
+			path = " Feedback Components";
+			sourceTree = "<group>";
+		};
+		DDF903EE2D1CCB7200B9B947 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		DDF903EF2D1E2E3C00B9B947 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				DDF7EF912D162AA400347342 /* ReviewView.swift */,
+				DDF903F02D1E2E7B00B9B947 /* ConceptProgressRow.swift */,
+				DDF903F22D1E2F0100B9B947 /* ReviewViewModel.swift */,
+			);
+			path = Review;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +467,7 @@
 				DD87B0EB2CF3C18000FEACC7 /* XCRemoteSwiftPackageReference "SwiftWhisper" */,
 				DD87B0F02CF3C95F00FEACC7 /* XCRemoteSwiftPackageReference "AudioKit" */,
 				DD592B5F2D0B792100C408A6 /* XCRemoteSwiftPackageReference "swift-toolkit" */,
+				DD231C302D388A1000078C30 /* XCRemoteSwiftPackageReference "Orb" */,
 			);
 			productRefGroup = DD87B0992CDD65B300FEACC7 /* Products */;
 			projectDirPath = "";
@@ -384,14 +496,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDF903CF2D1A8E2400B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DDAE25E22CF8EDAD002C127F /* LoadingIndicatorView.swift in Sources */,
 				DD87B0B92CE1B17400FEACC7 /* Secrets.swift in Sources */,
+				DD231C382D388B2900078C30 /* OrbView.swift in Sources */,
 				DD87B0C22CE7EBEC00FEACC7 /* EITextField.swift in Sources */,
+				DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DD87B0CA2CE803EB00FEACC7 /* Concept.swift in Sources */,
 				DD87B0C62CE7F28900FEACC7 /* IconBox.swift in Sources */,
-				DD87B0D72CEFB35900FEACC7 /* LearnView.swift in Sources */,
 				DD87B0BB2CE1B1AB00FEACC7 /* Chat.swift in Sources */,
+				DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */,
 				DDF7EF9E2D17AA1C00347342 /* TopicRepository.swift in Sources */,
 				DD87B09C2CDD65B300FEACC7 /* ExplainItApp.swift in Sources */,
 				DDAE25E02CF8DD31002C127F /* ConceptQuestionsView.swift in Sources */,
@@ -400,31 +513,51 @@
 				DD87B0DC2CEFB68B00FEACC7 /* ExplainViewModel.swift in Sources */,
 				DD87B0B72CE1B15D00FEACC7 /* OpenAIService.swift in Sources */,
 				DD87B0E02CF19B2B00FEACC7 /* FeedbackMessageView.swift in Sources */,
+				DD231C3F2D38B2E600078C30 /* EndButton.swift in Sources */,
+				DDF903EC2D1CC91A00B9B947 /* SubconceptsSection.swift in Sources */,
 				DDF7EF922D162AA400347342 /* ReviewView.swift in Sources */,
 				DDF7EF992D17A99700347342 /* ResponseGradingService.swift in Sources */,
+				DDF903F32D1E2F0100B9B947 /* ReviewViewModel.swift in Sources */,
+				DD231C3B2D388B2900078C30 /* RotatingGlowView.swift in Sources */,
 				DD87B0BF2CE7E95F00FEACC7 /* PromptView.swift in Sources */,
+				DD231C392D388B2900078C30 /* WavyBlobView.swift in Sources */,
 				DD87B0AF2CE1AFDA00FEACC7 /* ChatViewModel.swift in Sources */,
 				DD87B0D32CEC8C1D00FEACC7 /* LearnOrExplain.swift in Sources */,
+				DDF903E32D1CA8BC00B9B947 /* DIContainer.swift in Sources */,
 				DD87B0C42CE7EFE600FEACC7 /* TopicCard.swift in Sources */,
 				DDF903CD2D1A1CB700B9B947 /* ConceptProficiencyManager.swift in Sources */,
 				DDAE25D42CF5420B002C127F /* Recorder.swift in Sources */,
+				DD231C3A2D388B2900078C30 /* RealisticShadows.swift in Sources */,
+				DDF903E72D1CAA4E00B9B947 /* PromptViewModel.swift in Sources */,
+				DD231C3C2D388B2900078C30 /* OrbConfiguration.swift in Sources */,
+				DDF903DA2D1C9A8D00B9B947 /* TopicViewModel.swift in Sources */,
 				DD87B0CE2CE81DBF00FEACC7 /* SpeechRecognitionView.swift in Sources */,
+				DDF903E52D1CA91500B9B947 /* ViewModelProvider.swift in Sources */,
+				DDF903F12D1E2E7B00B9B947 /* ConceptProgressRow.swift in Sources */,
 				DD87B0DE2CF194EF00FEACC7 /* FeedbackModal.swift in Sources */,
 				DD87B0B22CE1B06000FEACC7 /* ChatView.swift in Sources */,
+				DDF903E02D1C9C1400B9B947 /* BreadCrumbView.swift in Sources */,
 				DDF7EFA12D17AC6F00347342 /* ExplainViewModel+Factory.swift in Sources */,
 				DD87B0C82CE8032B00FEACC7 /* Topic.swift in Sources */,
 				DDAE25DE2CF8DCEA002C127F /* ConceptListView.swift in Sources */,
+				DDF903EA2D1CC89A00B9B947 /* ConceptHierarchyView.swift in Sources */,
 				DDAE25DC2CF8DCBF002C127F /* ProgressIndicatorView.swift in Sources */,
 				DD87B0E82CF2CEEE00FEACC7 /* ConceptView.swift in Sources */,
+				DD231C2F2D3884A000078C30 /* Theme.swift in Sources */,
 				DDAE25D82CF7FA7B002C127F /* FeedbackView.swift in Sources */,
+				DDF903D72D1BC05500B9B947 /* ProficiencyBadge.swift in Sources */,
+				DDF903D52D1BC01A00B9B947 /* ProficiencyCard.swift in Sources */,
 				DDAE25D62CF5549D002C127F /* Question.swift in Sources */,
 				DD87B0B42CE1B0C600FEACC7 /* MessageBubbleView.swift in Sources */,
+				DD231C3D2D388B2900078C30 /* ParticlesView.swift in Sources */,
+				DDF903DE2D1C9C0100B9B947 /* BreadCrumbViewModel.swift in Sources */,
 				DD87B0DA2CEFB37200FEACC7 /* ExplainView.swift in Sources */,
 				DDF903CB2D1A1C5000B9B947 /* ConceptProficiency.swift in Sources */,
 				DD87B0D02CE81F7A00FEACC7 /* SpeechRecognitionService.swift in Sources */,
 				DDF7EF9B2D17A9AA00347342 /* ConceptDefinitionService.swift in Sources */,
 				DD87B0EA2CF3C15800FEACC7 /* WhisperTranscriptionService.swift in Sources */,
 				DD87B0AA2CDD664F00FEACC7 /* Feedback.swift in Sources */,
+				DDF903D32D1BBFF600B9B947 /* PracticeHistorySection.swift in Sources */,
 				DDF7EF972D17A97A00347342 /* QuestionGenerationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,6 +780,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD231C302D388A1000078C30 /* XCRemoteSwiftPackageReference "Orb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/metasidd/Orb.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		DD592B5F2D0B792100C408A6 /* XCRemoteSwiftPackageReference "swift-toolkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/readium/swift-toolkit.git";

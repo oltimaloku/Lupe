@@ -26,8 +26,8 @@ struct FeedbackView: View {
                         // Concepts Section with Proficiency
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Key Concepts")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             EnhancedConceptListView(
                                 segments: feedback.segments,
@@ -46,8 +46,8 @@ struct FeedbackView: View {
                         // Detailed Feedback
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Detailed Feedback")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             FeedbackMessageView(
                                 feedbackAnalysis: feedback,
@@ -59,51 +59,60 @@ struct FeedbackView: View {
                         // Model Answer
                         VStack(alignment: .leading, spacing: 16) {
                             Text("Model Answer")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .heading()
+                                .foregroundColor(Color(UIColor.label))
                             
                             Text(viewModel.currentQuestions[viewModel.currentQuestionIndex].modelAnswer)
+                                .font(Theme.Fonts.body)
                                 .padding()
-                                .background(Color.blue.opacity(0.1))
+                                .background(.black.opacity(0.1))
                                 .cornerRadius(8)
                         }
                         .padding(.horizontal)
                         .padding(.bottom)
                     } else {
                         Text("No feedback available")
+                            .font(Theme.Fonts.body)
                             .foregroundColor(.secondary)
                     }
                 }
             }
             
+            
+            submitButton.padding(.init(top: 20, leading: 20, bottom: 0, trailing: 20))
             // Navigation Buttons
-            VStack {
-                Divider()
-                
-                HStack(spacing: 20) {
-                    Button(action: onPreviousQuestion) {
-                        Label("Previous", systemImage: "arrow.left")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(viewModel.currentQuestionIndex == 0)
-                    
-                    Button(action: onRetryQuestion) {
-                        Label("Retry", systemImage: "arrow.clockwise")
-                            .frame(maxWidth: .infinity)
-                    }
-                    
-                    Button(action: onNextQuestion) {
-                        Label(isLastQuestion ? "Finish" : "Next", systemImage: "arrow.right")
-                            .frame(maxWidth: .infinity)
-                    }
-                    
-                }
-                .buttonStyle(.bordered)
-                .padding()
-            }
-            .background(Color(.systemBackground))
+//            VStack {
+//                Divider()
+//                
+//                HStack(spacing: 20) {
+//                    Button(action: onPreviousQuestion) {
+//                        Label("Previous", systemImage: "arrow.left")
+//                            .frame(maxWidth: .infinity)
+//                            .font(Theme.Fonts.body)
+//                    }
+//                    .disabled(viewModel.currentQuestionIndex == 0)
+//                    .tint(Theme.accentColor)
+//                    
+//                    Button(action: onRetryQuestion) {
+//                        Label("Retry", systemImage: "arrow.clockwise")
+//                            .frame(maxWidth: .infinity)
+//                            .font(Theme.Fonts.body)
+//                    }
+//                    .tint(Theme.accentColor)
+//                    
+//                    Button(action: onNextQuestion) {
+//                        Label(isLastQuestion ? "Finish" : "Next", systemImage: "arrow.right")
+//                            .frame(maxWidth: .infinity)
+//                            .font(Theme.Fonts.body)
+//                    }
+//                    .tint(Theme.accentColor)
+//                }
+//                .buttonStyle(.bordered)
+//                .padding()
+//            }
+//            .background(Color(.systemBackground))
         }
-        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback")
+        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback").font(Theme.Fonts.heading)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showConceptQuestions) {
             if let concept = selectedConcept {
@@ -111,7 +120,24 @@ struct FeedbackView: View {
             }
         }
     }
+    
+    private var submitButton: some View {
+        Button(action: onNextQuestion) {
+            HStack {
+                Image(systemName: "paperplane.fill")
+                Text(isLastQuestion ? "Finish" : "Continue")
+                    .font(.custom("Georgia", size: 16)).bold()
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Theme.accentColor)
+            .foregroundColor(.white)
+            .cornerRadius(20)
+        }.frame(maxWidth: .infinity)
+    }
 }
+
+
 
 // MARK: - Supporting Views
 
@@ -125,18 +151,21 @@ struct EnhancedConceptListView: View {
         var conceptSegments: [String: FeedbackSegment] = [:]
         
         for segment in segments {
-            if let existingSegment = conceptSegments[segment.concept] {
+            // Skip segments with no concept
+            guard let concept = segment.concept else { continue }
+            
+            if let existingSegment = conceptSegments[concept] {
                 let shouldReplace = compareFeedbackTypes(new: segment.feedbackType,
                                                        existing: existingSegment.feedbackType)
                 if shouldReplace {
-                    conceptSegments[segment.concept] = segment
+                    conceptSegments[concept] = segment
                 }
             } else {
-                conceptSegments[segment.concept] = segment
+                conceptSegments[concept] = segment
             }
         }
         
-        return Array(conceptSegments.values).sorted { $0.concept < $1.concept }
+        return Array(conceptSegments.values).sorted { $0.concept ?? "" < $1.concept ?? "" }
     }
     
     private func compareFeedbackTypes(new: FeedbackType, existing: FeedbackType) -> Bool {
@@ -154,7 +183,9 @@ struct EnhancedConceptListView: View {
                     segment: segment,
                     viewModel: viewModel,
                     isSelected: selectedConcept == segment.concept,
-                    onTap: { onConceptTap(segment.concept) }
+                    onTap: { if let concept = segment.concept {
+                        onConceptTap(concept)
+                    }}
                 )
             }
         }
@@ -172,16 +203,17 @@ struct ConceptProgressCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 // Concept Name and Status
                 HStack {
-                    Text(segment.concept)
-                        .font(.headline)
+                    Text(segment.concept ?? "Irrelevant Content")  // Add fallback text
+                        .font(Theme.Fonts.body)
                         .lineLimit(1)
                     Spacer()
                     Image(systemName: feedbackIcon)
                         .foregroundColor(segment.feedbackType.color)
                 }
                 
-                // Proficiency Progress
-                if let concept = viewModel.currentTopic?.concepts.first(where: { $0.name == segment.concept }),
+                // Only show proficiency progress if we have a concept
+                if let conceptName = segment.concept,
+                   let concept = viewModel.currentTopic?.concepts.first(where: { $0.name == conceptName }),
                    let proficiency = concept.proficiency {
                     VStack(alignment: .leading, spacing: 4) {
                         ProgressView(value: proficiency.proficiencyScore, total: 100)
@@ -189,14 +221,20 @@ struct ConceptProgressCard: View {
                         
                         HStack {
                             Text(proficiency.masteryLevel.rawValue.capitalized)
-                                .font(.caption)
+                                .font(Theme.Fonts.small)
                                 .foregroundColor(.secondary)
                             Spacer()
                             Text("\(Int(proficiency.proficiencyScore))%")
-                                .font(.caption)
+                                .font(Theme.Fonts.small)
                                 .foregroundColor(.secondary)
                         }
                     }
+                } else if segment.feedbackType == .irrelevant {
+                    // Show explanation for irrelevant content
+                    Text(segment.explanation)
+                        .font(Theme.Fonts.small)
+                        .foregroundColor(.secondary)
+                        .lineLimit(2)
                 }
             }
             .padding()
@@ -217,12 +255,13 @@ struct ConceptProgressCard: View {
         case .correct: return "checkmark.circle.fill"
         case .partiallyCorrect: return "exclamationmark.circle.fill"
         case .incorrect: return "xmark.circle.fill"
+        case .irrelevant: return "minus.circle.fill"  // Changed to minus as discussed earlier
         }
     }
     
     private func masteryColor(for level: MasteryLevel) -> Color {
         switch level {
-        case .novice: return .red
+        case .novice: return Theme.accentColor
         case .beginner: return .orange
         case .intermediate: return .yellow
         case .advanced: return .blue
@@ -231,15 +270,26 @@ struct ConceptProgressCard: View {
     }
     
     private func getBorderColor(for feedbackType: FeedbackType) -> Color {
-            switch feedbackType {
-            case .correct:
-                return Color.green.opacity(0.8)
-            case .partiallyCorrect:
-                return Color.yellow.opacity(0.8)
-            case .incorrect:
-                return Color.red.opacity(0.8)
-            }
+        switch feedbackType {
+        case .correct:
+            return Color.green.opacity(0.8)
+        case .partiallyCorrect:
+            return Color.yellow.opacity(0.8)
+        case .incorrect:
+            return Theme.accentColor.opacity(0.8)
+        case .irrelevant:
+            return .gray.opacity(0.8)
         }
+    }
 }
 
-
+#Preview {
+    NavigationView {
+        FeedbackView(
+            onNextQuestion: {},
+            onPreviousQuestion: {},
+            onRetryQuestion: {}
+        )
+        .environmentObject(ExplainViewModel.createForPreview())
+    }
+}

@@ -89,6 +89,12 @@ struct GradingCriterion: Codable {
             )
         }
     }
+    
+    init(description: String, weight: Double, examples: [String]) {
+            self.description = description
+            self.weight = weight
+            self.examples = examples
+        }
 }
 
 // Extension to validate rubrics
