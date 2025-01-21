@@ -185,7 +185,7 @@ class ExplainViewModel: ObservableObject {
         
         for segment in segments {
             if let concept = conceptHierarchyService.findConceptInHierarchy(
-                name: segment.concept,
+                name: segment.concept ?? "",
                 in: currentTopic.concepts
             ) {
                 var updatedConcept = concept

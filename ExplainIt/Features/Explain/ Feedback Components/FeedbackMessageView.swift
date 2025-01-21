@@ -67,6 +67,8 @@ struct FeedbackSegmentView: View {
             return Color.yellow.opacity(0.8)
         case .incorrect:
             return Theme.accentColor.opacity(0.8)
+        case .irrelevant:
+            return .gray.opacity(0.8)
         }
     }
 }

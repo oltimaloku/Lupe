@@ -97,6 +97,50 @@ extension ExplainViewModel {
             viewModel.userResponses[firstQuestion.id] = "Calculus is used extensively in real-world applications. For example, in physics, we use derivatives to calculate velocity and acceleration from position functions. In economics, we use calculus to optimize profit functions and analyze marginal costs..."
         }
         
+        for question in mockQuestions {
+                let feedbackSegments = [
+                    FeedbackSegment(
+                        text: "Calculus helps us understand rates of change in physics and engineering",
+                        feedbackType: .correct,
+                        explanation: "Excellent explanation of practical applications",
+                        concept: "Calculus",
+                        keyPointsAddressed: ["Identifies practical applications"],
+                        criteriaMatched: ["Application examples"],
+                        isNewConcept: false
+                    ),
+                    FeedbackSegment(
+                        text: "Derivatives are used to optimize functions",
+                        feedbackType: .correct,
+                        explanation: "Good understanding of optimization applications",
+                        concept: "Derivatives",
+                        keyPointsAddressed: ["Demonstrates understanding of calculus concepts"],
+                        criteriaMatched: ["Understanding of core concepts"],
+                        definition: "Rate of change of a function",
+                        isNewConcept: true
+                    ),
+                    FeedbackSegment(
+                        text: "Integration helps find areas and volumes",
+                        feedbackType: .partiallyCorrect,
+                        explanation: "Basic understanding shown but could be more detailed",
+                        concept: "Integration",
+                        keyPointsAddressed: ["Links theory to practice"],
+                        criteriaMatched: ["Clarity and coherence"],
+                        definition: "Process of finding the area under a curve",
+                        isNewConcept: true
+                    )
+                ]
+                
+                viewModel.questionFeedback[question.id] = FeedbackAnalysis(
+                    segments: feedbackSegments,
+                    overallGrade: 0.85
+                )
+                
+                // Add mock user responses
+                viewModel.userResponses[question.id] = """
+                Calculus is used extensively in real-world applications. In physics, we use derivatives to calculate velocity and acceleration from position functions. In engineering, calculus helps optimize designs and solve complex problems. Integration is useful for calculating areas and volumes in various applications.
+                """
+            }
+        
         return viewModel
     }
     

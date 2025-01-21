@@ -10,7 +10,9 @@ import SwiftUI
 
 enum Theme {
     // Colors
-    static let accentColor = Color(UIColor(red: 1.0, green: 87/255, blue: 87/255, alpha: 1))
+    //static let accentColor = Color(UIColor(red: 1.0, green: 87/255, blue: 87/255, alpha: 1))
+    static let accentColor = Color(UIColor(red: 0.0, green: 0/255, blue: 0/255, alpha: 1))
+    //static let accentColor = Color(UIColor(red: 130/255, green: 210/255, blue: 210/255, alpha: 1))
     
     // Fonts
     enum Fonts {

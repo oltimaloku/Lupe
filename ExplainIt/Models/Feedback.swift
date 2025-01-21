@@ -12,7 +12,7 @@ struct FeedbackSegment: Identifiable, Codable {
     let text: String
     let feedbackType: FeedbackType
     let explanation: String
-    let concept: String
+    let concept: String?
     let keyPointsAddressed: [String]
     let criteriaMatched: [String]
     let definition: String?
@@ -49,13 +49,14 @@ struct FeedbackSegment: Identifiable, Codable {
         id = UUID()
         text = try container.decode(String.self, forKey: .text)
         explanation = try container.decode(String.self, forKey: .explanation)
-        concept = try container.decode(String.self, forKey: .concept)
+        concept = try container.decodeIfPresent(String.self, forKey: .concept)
         keyPointsAddressed = try container.decode([String].self, forKey: .keyPointsAddressed)
         criteriaMatched = try container.decode([String].self, forKey: .criteriaMatched)
         definition = try container.decodeIfPresent(String.self, forKey: .definition)
         isNewConcept = try container.decode(Bool.self, forKey: .isNewConcept)
         relatedToConceptId = try container.decodeIfPresent(UUID.self, forKey: .relatedToConceptId)
         
+        // In FeedbackSegment's decoder
         let feedbackTypeString = try container.decode(String.self, forKey: .feedbackType)
         switch feedbackTypeString.lowercased() {
         case "correct":
@@ -64,11 +65,12 @@ struct FeedbackSegment: Identifiable, Codable {
             feedbackType = .partiallyCorrect
         case "incorrect":
             feedbackType = .incorrect
-        
+        case "irrelevant", "not relevant":
+            feedbackType = .irrelevant
         default:
             throw DecodingError.dataCorruptedError(forKey: .feedbackType,
-                in: container,
-                debugDescription: "Invalid feedback type")
+                                                   in: container,
+                                                   debugDescription: "Invalid feedback type")
         }
     }
     
@@ -81,12 +83,14 @@ enum FeedbackType: String, Codable {
     case correct
     case partiallyCorrect
     case incorrect
+    case irrelevant
     
     var color: Color {
         switch self {
         case .correct: return .green.opacity(0.3)
         case .partiallyCorrect: return .yellow.opacity(0.3)
         case .incorrect: return .red.opacity(0.3)
+        case .irrelevant: return .gray.opacity(0.3)
         }
     }
 }

@@ -94,7 +94,8 @@ class OpenAIQuestionGenerationService: QuestionGenerationService {
                     content: """
                         You are an educational assistant specializing in creating comprehensive assessment questions. \
                         For each question, provide a model answer, relevant concepts, and detailed grading criteria. \
-                        Format your response as a JSON array of question objects.
+                        Format your response as a JSON array of question objects. Assume that the student can only answer the \
+                        question using text so do not ask for diagrams or pictures. \
                         Do not return markdown.
                         """
                 )

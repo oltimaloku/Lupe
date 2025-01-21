@@ -26,9 +26,17 @@ class ReviewViewModel: ObservableObject {
     
     func getNewConcepts() -> [String] {
         let allConcepts = Set(questionFeedback.values.flatMap { feedback in
-            feedback.segments.map { $0.concept }
+            feedback.segments
+                .compactMap { $0.concept }  // Filter out nil concepts
+                .filter { !$0.isEmpty }  // Filter out empty strings just in case
         })
         return Array(allConcepts).sorted()
+    }
+    
+    func getQuestionFeedback() -> [(index: Int, feedback: FeedbackAnalysis)] {
+        return Array(questionFeedback.values).enumerated().map { index, feedback in
+            (index: index + 1, feedback: feedback)
+        }
     }
     
     func getConceptProgress() -> [ConceptProgressData]? {

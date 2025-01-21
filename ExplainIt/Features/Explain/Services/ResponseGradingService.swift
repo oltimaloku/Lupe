@@ -35,37 +35,37 @@ class OpenAIGradingService: ResponseGradingService {
         )
         
         let userGPTMessage = GPTMessage(
-            role: "user",
-            content: """
-            Grade this response to the question "\(question.text)".
-            Response: "\(response)"
-            
-            For each sentence, evaluate based on the provided model answer, key points, required concepts, and grading criteria.
-            Return feedback as a JSON array with this structure for each sentence:
-            {
-                "text": "sentence from response",
-                "feedbackType": "correct",
-                "explanation": "explanation referencing specific criteria from the rubric",
-                "concept": "concept from the required concepts list being addressed",
-                "keyPointsAddressed": ["specific key points addressed in this sentence"],
-                "criteriaMatched": ["specific grading criteria matched"],
-                "isNewConcept": false,
-                "relatedToConceptId": null
-            }
-            
-            For concepts that are not in the required concepts list but are relevant to the topic:
-            - Set isNewConcept to true
-            - Set relatedToConceptId to null
-            - Still provide feedback on correctness and explanation
-            
-            Required concepts and their IDs:
-            \(question.rubric.requiredConcepts.map { concept in
-                "- \(concept): \(UUID())"
-            }.joined(separator: "\n"))
-            
-            Ensure each feedback maps to specific criteria and concepts from the rubric.
-            """
-        )
+                    role: "user",
+                    content: """
+                    Grade this response to the question "\(question.text)".
+                    Response: "\(response)"
+                    
+                    For each sentence, evaluate based on the provided model answer, key points, required concepts, and grading criteria.
+                    Return feedback as a JSON array with this structure for each sentence:
+                    {
+                        "text": "sentence from response",
+                        "feedbackType": "correct" | "incorrect" | "partially_correct" | "irrelevant",
+                        "explanation": "explanation referencing specific criteria from the rubric",
+                        "concept": "concept from the required concepts list being addressed",
+                        "keyPointsAddressed": ["specific key points addressed in this sentence"],
+                        "criteriaMatched": ["specific grading criteria matched"],
+                        "isNewConcept": false,
+                        "relatedToConceptId": null
+                    }
+                    
+                    For concepts that are not in the required concepts list but are relevant to the topic:
+                    - Set isNewConcept to true
+                    - Set relatedToConceptId to null
+                    - Still provide feedback on correctness and explanation
+                    
+                    Required concepts and their IDs:
+                    \(question.rubric.requiredConcepts.map { concept in
+                        "- \(concept): \(UUID())"
+                    }.joined(separator: "\n"))
+                    
+                    Ensure each feedback maps to specific criteria and concepts from the rubric.
+                    """
+                )
         
         print("System message: \n \(systemMessage) \n userGPTMessage: \n \(userGPTMessage)")
         
@@ -85,12 +85,14 @@ class OpenAIGradingService: ResponseGradingService {
     }
     
     func calculateOverallGrade(for segments: [FeedbackSegment]) -> Double {
-        let totalCount = segments.count
-        let weightedPoints = segments.reduce(0.0) { points, segment in
+        let relevantSegments = segments.filter { $0.feedbackType != .irrelevant }
+        let totalCount = relevantSegments.count
+        let weightedPoints = relevantSegments.reduce(0.0) { points, segment in
             let basePoints = switch segment.feedbackType {
             case .correct: 1.0
             case .partiallyCorrect: 0.5
             case .incorrect: 0.0
+            case .irrelevant: 0.0  // Though this case won't be reached due to the filter above
             }
             
             let bonusPoints = Double(segment.keyPointsAddressed.count + segment.criteriaMatched.count) * 0.1
