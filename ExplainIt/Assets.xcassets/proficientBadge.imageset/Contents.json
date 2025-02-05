@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "olti._Cartoon-style_proficiency_badge_sleek_silver_with_a_simpl_3b79e7f8-71b6-4dd6-86ec-d8b82cc37267-2.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "olti._Cartoon-style_proficiency_badge_sleek_silver_with_a_simpl_3b79e7f8-71b6-4dd6-86ec-d8b82cc37267-2 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "olti._Cartoon-style_proficiency_badge_sleek_silver_with_a_simpl_3b79e7f8-71b6-4dd6-86ec-d8b82cc37267-2 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

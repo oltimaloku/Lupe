@@ -4,6 +4,7 @@ struct FeedbackView: View {
     @EnvironmentObject private var viewModel: ExplainViewModel
     @State private var selectedConcept: String?
     @State private var showConceptQuestions = false
+    @State private var showBadgeExplanation = false  // New state for badge overlay
     
     let onNextQuestion: () -> Void
     let onPreviousQuestion: () -> Void
@@ -14,105 +15,91 @@ struct FeedbackView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack(spacing: 24) {
-                    if let feedback = viewModel.questionFeedback[viewModel.currentQuestions[viewModel.currentQuestionIndex].id] {
-                        // Progress Indicator
-                        ProgressIndicatorView(score: feedback.overallGrade)
+        ZStack {
+            VStack(spacing: 0) {
+                ScrollView {
+                    VStack(spacing: 24) {
+                        if let feedback = viewModel.questionFeedback[viewModel.currentQuestions[viewModel.currentQuestionIndex].id] {
+                            // Use the updated FeedbackBadge and pass the onBadgeTapped callback.
+                            FeedbackBadge(overallGrade: feedback.overallGrade, onBadgeTapped: {
+                                withAnimation {
+                                    showBadgeExplanation = true
+                                }
+                            })
                             .frame(height: 200)
                             .padding(.top)
-                        
-                        // Concepts Section with Proficiency
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Key Concepts")
-                                .heading()
-                                .foregroundColor(Color(UIColor.label))
                             
-                            EnhancedConceptListView(
-                                segments: feedback.segments,
-                                viewModel: viewModel,
-                                selectedConcept: $selectedConcept
-                            ) { concept in
-                                if selectedConcept == concept {
-                                    selectedConcept = nil // Deselect if already selected
-                                } else {
-                                    selectedConcept = concept // Select new concept
+                            // Concepts Section with Proficiency
+                            VStack(alignment: .leading, spacing: 16) {
+                                Text("Key Concepts")
+                                    .heading()
+                                    .foregroundColor(Color(UIColor.label))
+                                
+                                EnhancedConceptListView(
+                                    segments: feedback.segments,
+                                    viewModel: viewModel,
+                                    selectedConcept: $selectedConcept
+                                ) { concept in
+                                    if selectedConcept == concept {
+                                        selectedConcept = nil // Deselect if already selected
+                                    } else {
+                                        selectedConcept = concept // Select new concept
+                                    }
                                 }
                             }
-                        }
-                        .padding(.horizontal)
-                        
-                        // Detailed Feedback
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Detailed Feedback")
-                                .heading()
-                                .foregroundColor(Color(UIColor.label))
+                            .padding(.horizontal)
                             
-                            FeedbackMessageView(
-                                feedbackAnalysis: feedback,
-                                selectedConcept: selectedConcept
-                            )
-                        }
-                        .padding(.horizontal)
-                        
-                        // Model Answer
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Model Answer")
-                                .heading()
-                                .foregroundColor(Color(UIColor.label))
+                            // Detailed Feedback
+                            VStack(alignment: .leading, spacing: 16) {
+                                Text("Detailed Feedback")
+                                    .heading()
+                                    .foregroundColor(Color(UIColor.label))
+                                
+                                FeedbackMessageView(
+                                    feedbackAnalysis: feedback,
+                                    selectedConcept: selectedConcept
+                                )
+                            }
+                            .padding(.horizontal)
                             
-                            Text(viewModel.currentQuestions[viewModel.currentQuestionIndex].modelAnswer)
+                            // Model Answer
+                            VStack(alignment: .leading, spacing: 16) {
+                                Text("Model Answer")
+                                    .heading()
+                                    .foregroundColor(Color(UIColor.label))
+                                
+                                Text(viewModel.currentQuestions[viewModel.currentQuestionIndex].modelAnswer)
+                                    .font(Theme.Fonts.body)
+                                    .padding()
+                                    .background(Color.black.opacity(0.1))
+                                    .cornerRadius(8)
+                            }
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                        } else {
+                            Text("No feedback available")
                                 .font(Theme.Fonts.body)
-                                .padding()
-                                .background(.black.opacity(0.1))
-                                .cornerRadius(8)
+                                .foregroundColor(.secondary)
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                    } else {
-                        Text("No feedback available")
-                            .font(Theme.Fonts.body)
-                            .foregroundColor(.secondary)
                     }
                 }
+                
+                submitButton
+                    .padding(.init(top: 20, leading: 20, bottom: 0, trailing: 20))
             }
             
-            
-            submitButton.padding(.init(top: 20, leading: 20, bottom: 0, trailing: 20))
-            // Navigation Buttons
-//            VStack {
-//                Divider()
-//                
-//                HStack(spacing: 20) {
-//                    Button(action: onPreviousQuestion) {
-//                        Label("Previous", systemImage: "arrow.left")
-//                            .frame(maxWidth: .infinity)
-//                            .font(Theme.Fonts.body)
-//                    }
-//                    .disabled(viewModel.currentQuestionIndex == 0)
-//                    .tint(Theme.accentColor)
-//                    
-//                    Button(action: onRetryQuestion) {
-//                        Label("Retry", systemImage: "arrow.clockwise")
-//                            .frame(maxWidth: .infinity)
-//                            .font(Theme.Fonts.body)
-//                    }
-//                    .tint(Theme.accentColor)
-//                    
-//                    Button(action: onNextQuestion) {
-//                        Label(isLastQuestion ? "Finish" : "Next", systemImage: "arrow.right")
-//                            .frame(maxWidth: .infinity)
-//                            .font(Theme.Fonts.body)
-//                    }
-//                    .tint(Theme.accentColor)
-//                }
-//                .buttonStyle(.bordered)
-//                .padding()
-//            }
-//            .background(Color(.systemBackground))
+            // Full-screen overlay for badge explanations.
+            if showBadgeExplanation {
+                BadgeExplanationOverlay {
+                    withAnimation {
+                        showBadgeExplanation = false
+                    }
+                }
+                .zIndex(1)
+            }
         }
-        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback").font(Theme.Fonts.heading)
+        .navigationTitle("Question \(viewModel.currentQuestionIndex + 1) Feedback")
+        .font(Theme.Fonts.heading)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showConceptQuestions) {
             if let concept = selectedConcept {
@@ -133,10 +120,10 @@ struct FeedbackView: View {
             .background(Theme.accentColor)
             .foregroundColor(.white)
             .cornerRadius(20)
-        }.frame(maxWidth: .infinity)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
-
 
 
 // MARK: - Supporting Views

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "olti._Cartoon-style_beginner_achievement_badge_bronze_with_a_ro_15655094-f69e-439c-86d2-2d7431e1ce50-2.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "olti._Cartoon-style_beginner_achievement_badge_bronze_with_a_ro_15655094-f69e-439c-86d2-2d7431e1ce50-2 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "olti._Cartoon-style_beginner_achievement_badge_bronze_with_a_ro_15655094-f69e-439c-86d2-2d7431e1ce50-2 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

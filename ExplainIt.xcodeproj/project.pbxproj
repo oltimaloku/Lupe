@@ -15,6 +15,8 @@
 		DD231C3C2D388B2900078C30 /* OrbConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C362D388B2900078C30 /* OrbConfiguration.swift */; };
 		DD231C3D2D388B2900078C30 /* ParticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C372D388B2900078C30 /* ParticlesView.swift */; };
 		DD231C3F2D38B2E600078C30 /* EndButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C3E2D38B2E600078C30 /* EndButton.swift */; };
+		DD231C422D53F4C800078C30 /* FeedbackBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C412D53F4C800078C30 /* FeedbackBadge.swift */; };
+		DD231C442D53FDDD00078C30 /* BadgeExplanationOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD231C432D53FDDD00078C30 /* BadgeExplanationOverlayView.swift */; };
 		DD87B09C2CDD65B300FEACC7 /* ExplainItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */; };
 		DD87B0A02CDD65B400FEACC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */; };
 		DD87B0A32CDD65B400FEACC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD87B0A22CDD65B400FEACC7 /* Preview Assets.xcassets */; };
@@ -87,6 +89,8 @@
 		DD231C362D388B2900078C30 /* OrbConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbConfiguration.swift; sourceTree = "<group>"; };
 		DD231C372D388B2900078C30 /* ParticlesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesView.swift; sourceTree = "<group>"; };
 		DD231C3E2D38B2E600078C30 /* EndButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndButton.swift; sourceTree = "<group>"; };
+		DD231C412D53F4C800078C30 /* FeedbackBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackBadge.swift; sourceTree = "<group>"; };
+		DD231C432D53FDDD00078C30 /* BadgeExplanationOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeExplanationOverlayView.swift; sourceTree = "<group>"; };
 		DD87B0982CDD65B300FEACC7 /* ExplainIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExplainIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD87B09B2CDD65B300FEACC7 /* ExplainItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainItApp.swift; sourceTree = "<group>"; };
 		DD87B09F2CDD65B400FEACC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -262,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				DD231C312D388AF600078C30 /* Orb */,
-				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 				DD87B0C12CE7EBEC00FEACC7 /* EITextField.swift */,
 				DD87B0C52CE7F28900FEACC7 /* IconBox.swift */,
 				DDAE25E12CF8EDAD002C127F /* LoadingIndicatorView.swift */,
@@ -381,9 +384,12 @@
 		DDF903ED2D1CCB0600B9B947 /*  Feedback Components */ = {
 			isa = PBXGroup;
 			children = (
+				DDAE25DB2CF8DCBF002C127F /* ProgressIndicatorView.swift */,
 				DD87B0DF2CF19B2B00FEACC7 /* FeedbackMessageView.swift */,
 				DD87B0DD2CF194EF00FEACC7 /* FeedbackModal.swift */,
 				DDAE25D72CF7FA7B002C127F /* FeedbackView.swift */,
+				DD231C412D53F4C800078C30 /* FeedbackBadge.swift */,
+				DD231C432D53FDDD00078C30 /* BadgeExplanationOverlayView.swift */,
 			);
 			path = " Feedback Components";
 			sourceTree = "<group>";
@@ -488,11 +494,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDAE25E22CF8EDAD002C127F /* LoadingIndicatorView.swift in Sources */,
+				DD231C442D53FDDD00078C30 /* BadgeExplanationOverlayView.swift in Sources */,
 				DD87B0B92CE1B17400FEACC7 /* Secrets.swift in Sources */,
 				DD231C382D388B2900078C30 /* OrbView.swift in Sources */,
 				DD87B0C22CE7EBEC00FEACC7 /* EITextField.swift in Sources */,
 				DDF903D12D1BA1F800B9B947 /* ConceptHierarchyService.swift in Sources */,
 				DD87B0CA2CE803EB00FEACC7 /* Concept.swift in Sources */,
+				DD231C422D53F4C800078C30 /* FeedbackBadge.swift in Sources */,
 				DD87B0C62CE7F28900FEACC7 /* IconBox.swift in Sources */,
 				DD87B0BB2CE1B1AB00FEACC7 /* Chat.swift in Sources */,
 				DDF903DC2D1C9AA100B9B947 /* ConceptViewModel.swift in Sources */,
